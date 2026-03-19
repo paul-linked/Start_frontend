@@ -1,108 +1,165 @@
-// ─── Node & Map ───
-export interface MapNode {
-  node_id: string;
-  label: string;
-  subtitle: string;
-  difficulty: number;
-  asset_class: string;
-  status: "locked" | "available" | "completed";
-  score?: number;
-  icon: string;
-}
+// ─── Screen flow ───
+export type GameScreen =
+  | "landing"
+  | "round_intro"
+  | "snap_decision"
+  | "briefing_room"
+  | "allocation"
+  | "feedback"
+  | "portfolio_update"
+  | "cash_injection"
+  | "end_screen";
 
-export interface MapData {
-  nodes: MapNode[];
-  player_progress: PlayerProgress;
-}
+export type QuestType = "snap_decision" | "briefing_room" | "allocation";
 
-export interface PlayerProgress {
-  completed_nodes: string[];
-  current_xp: number;
-  level: number;
-}
-
-// ─── Scenarios ───
-export type ScenarioPhase = "reigns" | "allocation" | "event" | "results";
-
-export interface NodeScenarios {
-  reigns: ReignsScenario;
-  allocation: AllocationScenario;
-  event: EventScenario;
-}
-
-// Reigns (swipe cards)
-export interface ReignsScenario {
-  scenario_id: string;
-  cards: ReignsCard[];
-}
-
-export interface ReignsCard {
-  prompt: string;
-  left: ReignsOption;
-  right: ReignsOption;
-  tap: ReignsOption;
-  lesson: string;
-}
-
-export interface ReignsOption {
-  label: string;
-  impact: {
-    xp: number;
-    [key: string]: number;
-  };
-}
-
-// Allocation (bucket sliders)
-export interface AllocationScenario {
-  scenario_id: string;
-  starting_balance: number;
-  accounts: AllocationAccount[];
-  goal: string;
-  optimal: Record<string, number>;
-}
-
-export interface AllocationAccount {
+// ─── Snap Decision ───
+export interface SnapOption {
   id: string;
   label: string;
   description: string;
-  interest: number;
-  color: string;
-}
-
-// Event popup
-export interface EventScenario {
-  scenario_id: string;
-  prompt: string;
-  description: string;
-  options: EventOption[];
-  time_limit_seconds?: number;
-}
-
-export interface EventOption {
-  label: string;
-  xp: number;
-  correct: boolean;
+  quality: "good" | "neutral" | "bad";
   feedback: string;
+  learning: string;
+  scoreImpact: Partial<Scores>;
 }
 
-// ─── Results ───
-export interface NodeResult {
-  node_id: string;
-  xp_earned: number;
-  total_xp: number;
-  level: number;
-  score: number;
-  lessons: string[];
-  achievements: string[];
-  next_node_unlocked: string | null;
+export interface SnapCard {
+  id: string;
+  headline: string;
+  description: string;
+  options: SnapOption[];
 }
 
-// ─── Game Session State ───
-export type GamePhase = "map" | "playing" | "results";
+export interface SnapDecisionQuest {
+  type: "snap_decision";
+  cards: SnapCard[];
+}
 
-export interface DecisionRecord {
-  scenario_id: string;
-  phase: ScenarioPhase;
-  decision: string;
-  xp_earned: number;
+// ─── Briefing Room ───
+export interface BriefingArticle {
+  source: string;
+  sourceType: string;
+  headline: string;
+  standfirst: string;
+  paragraphs: string[]; // HTML strings — clues wrapped in <mark>
+}
+
+export interface BriefingOutcome {
+  quality: "good" | "neutral" | "bad";
+  feedback: string;
+  learning: string;
+  scoreImpact: Partial<Scores>;
+}
+
+export interface BriefingRoomQuest {
+  type: "briefing_room";
+  articles: BriefingArticle[]; // 1 for easy rounds, 2 for Round 5
+  chartData: number[];
+  chartLabel: string;
+  chartDelta: string;
+  outcomes: {
+    buy: BriefingOutcome;
+    hold: BriefingOutcome;
+    sell: BriefingOutcome;
+  };
+}
+
+// ─── Allocation ───
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  returnPct: number; // actual return this round
+  returnDisplay?: string; // override display, e.g. "-15% to +25%"
+  risk: "low" | "medium" | "high";
+  unlockRound: number;
+}
+
+export interface AllocationQuest {
+  type: "allocation";
+  products: Product[];
+  marketContext: string;
+}
+
+// ─── Round ───
+export type Quest = SnapDecisionQuest | BriefingRoomQuest | AllocationQuest;
+
+export interface CashInjection {
+  amount: number;
+  reason: string;
+}
+
+export interface Round {
+  id: number;
+  year: number;
+  kicker: string; // e.g. "Year One"
+  title: string;
+  description: string;
+  quest: Quest;
+  // Market returns applied to existing portfolio this round
+  marketReturns: Record<string, number>;
+  // Cash injection after this round (if any)
+  injection?: CashInjection;
+}
+
+// ─── Scores ───
+export interface Scores {
+  diversification: number;
+  riskAlignment: number;
+  patience: number;
+  learning: number;
+  wealth: number;
+}
+
+// ─── Portfolio ───
+export interface PortfolioAllocation {
+  [productId: string]: number; // percentage 0-100
+}
+
+// ─── Game State ───
+export interface GameState {
+  screen: GameScreen;
+  currentRound: number;
+  portfolioValue: number;
+  portfolioHistory: number[]; // value after each round
+  savingsHistory: number[]; // ghost line: savings-only path
+  perfectHistory: number[]; // ghost line: perfect decisions
+  totalDeposited: number;
+  allocation: PortfolioAllocation;
+  scores: Scores;
+  xp: number;
+
+  // Current round transient state
+  currentFeedback: {
+    quality: "good" | "neutral" | "bad";
+    feedback: string;
+    learning: string;
+    scoreDeltas: Partial<Scores>;
+  } | null;
+  portfolioDelta: number;
+  snapCardIndex: number; // for multi-card snap decisions
+
+  // Decisions history (for end screen narrative)
+  decisions: Array<{
+    round: number;
+    choice: string;
+    quality: "good" | "neutral" | "bad";
+  }>;
+}
+
+// ─── Investor Profile (end screen) ───
+export type ProfileQuadrant =
+  | "steady_hand"      // rational + conservative
+  | "calculated_risk"  // rational + aggressive
+  | "cautious_observer" // reactive + conservative
+  | "thrill_seeker";   // reactive + aggressive
+
+export interface InvestorProfile {
+  quadrant: ProfileQuadrant;
+  title: string;
+  subtitle: string;
+  rationalScore: number;  // -1 to 1 (x-axis)
+  aggressiveScore: number; // -1 to 1 (y-axis)
+  totalReturn: number;
+  totalReturnPct: number;
 }

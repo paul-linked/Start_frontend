@@ -1,7 +1,5 @@
-"use client";
+import GameShell from "../components/GameShell";
 
-import { MapView } from "@/components/game/MapView";
-
-export default function HomePage() {
-  return <MapView />;
+export default function Home() {
+  return <GameShell />;
 }

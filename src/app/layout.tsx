@@ -1,25 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono } from "next/font/google";
-import "@/styles/globals.css";
-
-const fontMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Wealth Manager Arena",
-    template: "%s | Wealth Manager Arena",
-  },
-  description: "Learn investing by doing — a gamified investment education game",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Wealth Arena",
-  },
+  title: "Wealth Manager Arena — The Investing Game",
+  description:
+    "Learn to invest starting with CHF 50. A gamified investment education experience by PostFinance.",
 };
 
 export const viewport: Viewport = {
@@ -27,7 +12,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#7BA86A",
+  themeColor: "#FFFBF0",
 };
 
 export default function RootLayout({
@@ -36,10 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={fontMono.variable}>
+    <html lang="en">
       <head>
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="no-select">{children}</body>
     </html>
