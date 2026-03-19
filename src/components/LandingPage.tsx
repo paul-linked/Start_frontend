@@ -34,7 +34,7 @@ export default function LandingPage() {
   const { dispatch } = useGame();
 
   return (
-    <div className="relative z-10 flex flex-col min-h-dvh">
+    <div className="relative z-10 flex flex-col min-h-dvh" style={{ textShadow: "0 0 8px rgba(255,251,240,0.9), 0 0 4px rgba(255,251,240,0.9), 0 1px 3px rgba(255,251,240,0.8)" }}>
       {/* Top kicker */}
       <motion.div
         className="text-center pt-14 pb-2"

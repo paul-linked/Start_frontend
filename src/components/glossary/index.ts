@@ -1,0 +1,11 @@
+export { GlossaryProvider } from './GlossaryProvider';
+export { GlossaryText } from './GlossaryText';
+export { GlossaryTerm } from './GlossaryTerm';
+export { GlossaryTooltip } from './GlossaryTooltip';
+export { useGlossary } from './useGlossary';
+export { detectTerms } from './termDetection';
+export { calculatePosition } from './tooltipPositioning';
+export { GLOSSARY_TERMS } from './glossaryData';
+export type { GlossaryEntry } from './glossaryData';
+export type { TextSegment } from './termDetection';
+export type { TooltipPosition } from './tooltipPositioning';

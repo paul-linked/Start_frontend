@@ -39,6 +39,7 @@ function GameRouter() {
       <AnimatePresence mode="wait">
         <motion.div
           key={state.screen + "-" + state.currentRound + "-" + state.snapCardIndex}
+          className="relative z-10"
           variants={pageVariants}
           initial="enter"
           animate="center"
