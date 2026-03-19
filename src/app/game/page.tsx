@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useWebSocket, useGameLoop } from "@/hooks";
 import { useGameStore } from "@/stores/gameStore";
@@ -8,7 +8,7 @@ import { GameHud } from "@/components/hud/GameHud";
 import { FullScreenLoader } from "@/components/ui";
 import { ToastContainer, toast } from "@/components/ui";
 
-export default function GamePage() {
+function GameContent() {
   const searchParams = useSearchParams();
   const gameId = searchParams.get("id");
   const { session, state } = useGameStore();
@@ -58,5 +58,13 @@ export default function GamePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function GamePage() {
+  return (
+    <Suspense fallback={<FullScreenLoader text="Loading..." />}>
+      <GameContent />
+    </Suspense>
   );
 }
