@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface FeedbackFlashProps {
@@ -9,7 +9,6 @@ interface FeedbackFlashProps {
   xp: number;
   lesson?: string;
   onDone: () => void;
-  duration?: number;
 }
 
 const tones = {
@@ -42,18 +41,14 @@ export function FeedbackFlash({
   xp,
   lesson,
   onDone,
-  duration = 3000,
 }: FeedbackFlashProps) {
   const [visible, setVisible] = useState(true);
   const tone = tones[type];
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-      setTimeout(onDone, 350);
-    }, duration);
-    return () => clearTimeout(timer);
-  }, [duration, onDone]);
+  const handleContinue = () => {
+    setVisible(false);
+    setTimeout(onDone, 300);
+  };
 
   return (
     <AnimatePresence>
@@ -63,9 +58,8 @@ export function FeedbackFlash({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-end justify-center px-5 pb-8 sm:items-center sm:pb-0"
-          style={{ background: "rgba(59,90,58,0.12)" }}
-          onClick={() => { setVisible(false); setTimeout(onDone, 350); }}
+          className="fixed inset-0 z-50 flex items-end justify-center px-5 pb-6 sm:items-center sm:pb-0"
+          style={{ background: "rgba(59,90,58,0.15)" }}
         >
           <motion.div
             initial={{ y: 60, scale: 0.95 }}
@@ -74,12 +68,11 @@ export function FeedbackFlash({
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="w-full max-w-sm overflow-hidden rounded-3xl"
             style={{ background: tone.bg, color: tone.text }}
-            onClick={(e) => e.stopPropagation()}
           >
-            {/* Top accent strip */}
+            {/* Top accent */}
             <div className="h-1" style={{ background: tone.iconBg }} />
 
-            <div className="p-6 text-center">
+            <div className="p-6">
               {/* Icon */}
               <motion.div
                 initial={{ scale: 0, rotate: -20 }}
@@ -93,29 +86,50 @@ export function FeedbackFlash({
 
               {/* Title */}
               <h3
-                className="mb-1 text-xl"
+                className="mb-2 text-center text-xl"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {tone.title}
               </h3>
 
-              {/* Message */}
-              <p className="mb-2 text-sm opacity-90">{message}</p>
+              {/* Choice made */}
+              <p className="mb-3 text-center text-sm font-medium opacity-90">
+                {message}
+              </p>
 
               {/* Lesson */}
               {lesson && (
-                <p className="mb-4 text-sm leading-relaxed opacity-70">{lesson}</p>
+                <p className="mb-4 text-center text-sm leading-relaxed opacity-75">
+                  {lesson}
+                </p>
               )}
 
               {/* XP badge */}
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.3, type: "spring" }}
-                className="badge badge-xp text-base"
+              <div className="mb-5 text-center">
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3, type: "spring" }}
+                  className="badge badge-xp text-base"
+                >
+                  +{xp} XP
+                </motion.span>
+              </div>
+
+              {/* Continue button */}
+              <motion.button
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                onClick={handleContinue}
+                className="w-full rounded-2xl py-3.5 text-center text-sm font-semibold transition-transform active:scale-[0.97]"
+                style={{
+                  background: tone.iconBg,
+                  color: "white",
+                }}
               >
-                +{xp} XP
-              </motion.span>
+                Continue →
+              </motion.button>
             </div>
           </motion.div>
         </motion.div>
