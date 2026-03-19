@@ -1,72 +1,103 @@
 import { create } from "zustand";
-import type { GameState, GameSession, Player } from "@/types";
+import type {
+  ScenarioPhase,
+  PlayerProgress,
+  DecisionRecord,
+  NodeScenarios,
+} from "@/types";
 
 interface GameStore {
-  // State
-  session: GameSession | null;
-  localPlayerId: string | null;
-  state: GameState;
+  // Player
+  playerId: string | null;
+  progress: PlayerProgress;
+
+  // Current node session
+  currentNodeId: string | null;
+  scenarios: NodeScenarios | null;
+  phase: ScenarioPhase;
+  cardIndex: number; // for reigns cards
+
+  // Session tracking
+  sessionXp: number;
+  decisions: DecisionRecord[];
 
   // Actions
-  setSession: (session: GameSession | null) => void;
-  setLocalPlayer: (id: string) => void;
-  setState: (state: GameState) => void;
-  updatePlayer: (id: string, updates: Partial<Player>) => void;
-  addPlayer: (player: Player) => void;
-  removePlayer: (id: string) => void;
+  startNode: (nodeId: string, scenarios: NodeScenarios) => void;
+  setPhase: (phase: ScenarioPhase) => void;
+  nextCard: () => void;
+  recordDecision: (record: DecisionRecord) => void;
+  addXp: (xp: number) => void;
+  completeNode: (xp: number) => void;
   reset: () => void;
 }
 
 export const useGameStore = create<GameStore>((set) => ({
-  session: null,
-  localPlayerId: null,
-  state: "idle",
+  playerId: null,
+  progress: { completed_nodes: [], current_xp: 0, level: 1 },
 
-  setSession: (session) =>
-    set({ session, state: session?.state ?? "idle" }),
+  currentNodeId: null,
+  scenarios: null,
+  phase: "reigns",
+  cardIndex: 0,
 
-  setLocalPlayer: (id) => set({ localPlayerId: id }),
+  sessionXp: 0,
+  decisions: [],
 
-  setState: (state) =>
+  startNode: (nodeId, scenarios) =>
+    set({
+      currentNodeId: nodeId,
+      scenarios,
+      phase: "reigns",
+      cardIndex: 0,
+      sessionXp: 0,
+      decisions: [],
+    }),
+
+  setPhase: (phase) => set({ phase }),
+
+  nextCard: () => set((s) => ({ cardIndex: s.cardIndex + 1 })),
+
+  recordDecision: (record) =>
     set((s) => ({
-      state,
-      session: s.session ? { ...s.session, state } : null,
+      decisions: [...s.decisions, record],
+      sessionXp: s.sessionXp + record.xp_earned,
     })),
 
-  updatePlayer: (id, updates) =>
+  addXp: (xp) =>
+    set((s) => ({
+      sessionXp: s.sessionXp + xp,
+    })),
+
+  completeNode: (bonusXp) =>
     set((s) => {
-      if (!s.session) return s;
+      const totalEarned = s.sessionXp + bonusXp;
+      const newTotalXp = s.progress.current_xp + totalEarned;
+      const newLevel =
+        newTotalXp >= 1500 ? 5 :
+        newTotalXp >= 800 ? 4 :
+        newTotalXp >= 400 ? 3 :
+        newTotalXp >= 150 ? 2 : 1;
+
       return {
-        session: {
-          ...s.session,
-          players: s.session.players.map((p) =>
-            p.id === id ? { ...p, ...updates } : p
-          ),
+        sessionXp: s.sessionXp + bonusXp,
+        progress: {
+          ...s.progress,
+          current_xp: newTotalXp,
+          level: newLevel,
+          completed_nodes: s.currentNodeId
+            ? [...s.progress.completed_nodes, s.currentNodeId]
+            : s.progress.completed_nodes,
         },
       };
     }),
 
-  addPlayer: (player) =>
-    set((s) => {
-      if (!s.session) return s;
-      return {
-        session: {
-          ...s.session,
-          players: [...s.session.players, player],
-        },
-      };
+  reset: () =>
+    set({
+      currentNodeId: null,
+      scenarios: null,
+      phase: "reigns",
+      cardIndex: 0,
+      sessionXp: 0,
+      decisions: [],
     }),
-
-  removePlayer: (id) =>
-    set((s) => {
-      if (!s.session) return s;
-      return {
-        session: {
-          ...s.session,
-          players: s.session.players.filter((p) => p.id !== id),
-        },
-      };
-    }),
-
-  reset: () => set({ session: null, localPlayerId: null, state: "idle" }),
 }));

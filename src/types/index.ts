@@ -1,79 +1,108 @@
-// ─── API ───
-export interface ApiResponse<T = unknown> {
-  data: T;
-  status: number;
-  message?: string;
+// ─── Node & Map ───
+export interface MapNode {
+  node_id: string;
+  label: string;
+  subtitle: string;
+  difficulty: number;
+  asset_class: string;
+  status: "locked" | "available" | "completed";
+  score?: number;
+  icon: string;
 }
 
-export interface ApiError {
-  status: number;
-  message: string;
-  detail?: string;
+export interface MapData {
+  nodes: MapNode[];
+  player_progress: PlayerProgress;
 }
 
-// ─── Auth ───
-export interface User {
+export interface PlayerProgress {
+  completed_nodes: string[];
+  current_xp: number;
+  level: number;
+}
+
+// ─── Scenarios ───
+export type ScenarioPhase = "reigns" | "allocation" | "event" | "results";
+
+export interface NodeScenarios {
+  reigns: ReignsScenario;
+  allocation: AllocationScenario;
+  event: EventScenario;
+}
+
+// Reigns (swipe cards)
+export interface ReignsScenario {
+  scenario_id: string;
+  cards: ReignsCard[];
+}
+
+export interface ReignsCard {
+  prompt: string;
+  left: ReignsOption;
+  right: ReignsOption;
+  tap: ReignsOption;
+  lesson: string;
+}
+
+export interface ReignsOption {
+  label: string;
+  impact: {
+    xp: number;
+    [key: string]: number;
+  };
+}
+
+// Allocation (bucket sliders)
+export interface AllocationScenario {
+  scenario_id: string;
+  starting_balance: number;
+  accounts: AllocationAccount[];
+  goal: string;
+  optimal: Record<string, number>;
+}
+
+export interface AllocationAccount {
   id: string;
-  username: string;
-  avatar_url?: string;
-  created_at: string;
+  label: string;
+  description: string;
+  interest: number;
+  color: string;
 }
 
-export interface AuthTokens {
-  access_token: string;
-  refresh_token: string;
-  expires_at: number;
+// Event popup
+export interface EventScenario {
+  scenario_id: string;
+  prompt: string;
+  description: string;
+  options: EventOption[];
+  time_limit_seconds?: number;
 }
 
-// ─── Game ───
-export type GameState = "idle" | "waiting" | "playing" | "paused" | "finished";
-
-export interface GameSession {
-  id: string;
-  state: GameState;
-  players: Player[];
-  created_at: string;
-  settings: GameSettings;
+export interface EventOption {
+  label: string;
+  xp: number;
+  correct: boolean;
+  feedback: string;
 }
 
-export interface Player {
-  id: string;
-  username: string;
-  avatar_url?: string;
+// ─── Results ───
+export interface NodeResult {
+  node_id: string;
+  xp_earned: number;
+  total_xp: number;
+  level: number;
   score: number;
-  is_ready: boolean;
-  is_host: boolean;
-  connected: boolean;
+  lessons: string[];
+  achievements: string[];
+  next_node_unlocked: string | null;
 }
 
-export interface GameSettings {
-  max_players: number;
-  time_limit_seconds: number;
-  [key: string]: unknown; // extend per game
-}
+// ─── Game Session State ───
+export type GamePhase = "map" | "playing" | "results";
 
-// ─── Lobby ───
-export interface LobbyRoom {
-  id: string;
-  name: string;
-  host: Player;
-  player_count: number;
-  max_players: number;
-  state: GameState;
-}
-
-// ─── WebSocket ───
-export type WSMessageType =
-  | "game:state"
-  | "game:action"
-  | "game:chat"
-  | "player:join"
-  | "player:leave"
-  | "player:ready"
-  | "error";
-
-export interface WSMessage<T = unknown> {
-  type: WSMessageType;
-  payload: T;
-  timestamp: number;
+export interface DecisionRecord {
+  scenario_id: string;
+  phase: ScenarioPhase;
+  decision: string;
+  xp_earned: number;
 }
