@@ -3,6 +3,8 @@ import { gameSocket } from "@/lib/socket";
 import { useGameStore } from "@/stores/gameStore";
 import type { WSMessage, WSMessageType } from "@/types";
 
+export { useServiceWorker } from "./useServiceWorker";
+
 // ─── WebSocket Hook ───
 export function useWebSocket(gameId: string | null) {
   const { setSession, setState, addPlayer, removePlayer, updatePlayer } =

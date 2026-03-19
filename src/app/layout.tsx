@@ -1,5 +1,6 @@
-import type { Metadata, Viewport } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import { Orbitron, Exo_2, JetBrains_Mono } from "next/font/google";
+import { ClientProviders } from "@/components/layout/ClientProviders";
 import "@/styles/globals.css";
 
 // ─── Fonts ───
@@ -59,7 +60,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body className="no-select">{children}</body>
+      <body className="no-select">
+        <ClientProviders>{children}</ClientProviders>
+      </body>
     </html>
   );
 }

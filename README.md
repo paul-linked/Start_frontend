@@ -11,7 +11,7 @@ Next.js 14 + React game client with PWA support, WebSocket real-time communicati
 | Animation | Framer Motion 11 |
 | State | Zustand (game state + auth + toasts) |
 | Audio | Howler.js (lazy-loaded) |
-| Real-time | Native WebSocket with auto-reconnect |
+| Real-time | Native WebSocket with auto-reconnecnpmt |
 | PWA | next-pwa (Workbox under the hood) |
 
 ## Quick Start
