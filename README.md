@@ -15,6 +15,7 @@ Next.js 16.2 + React 19.2 game client with PWA support, WebSocket real-time comm
 | Real-time | Native WebSocket with auto-reconnect |
 | PWA | Manual service worker (`public/sw.js`) |
 
+
 ## Quick Start
 
 ```bash
