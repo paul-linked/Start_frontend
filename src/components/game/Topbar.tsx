@@ -103,7 +103,7 @@ export default function Topbar() {
             <span style={{
               fontFamily: "var(--font-display)", fontSize: 18, color: "var(--ink)",
             }}>
-              CHF {state.portfolioValue.toFixed(2)}
+              PFF {state.portfolioValue.toFixed(2)}
             </span>
             <span style={{
               fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 500,

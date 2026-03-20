@@ -272,8 +272,9 @@ export default function EndScreen() {
             padding: "14px 24px", fontSize: 14, fontWeight: 500,
             fontFamily: "var(--font-body)",
           }}
+          onClick={() => window.open("https://www.postfinance.ch/en/about-us/commitment/education/popcorn--finance--the-podcast-from-postfinance.html", "_blank")}
         >
-          Open PostFinance Account
+          Popcorn & Finance by PostFinance
         </button>
 
         {/* Play Again */}
