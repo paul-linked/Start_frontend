@@ -92,13 +92,13 @@ export default function RetirementScoreScreen() {
       {/* Final portfolio */}
       <motion.div className="text-center" variants={fadeUp} initial="hidden" animate="visible" custom={4}>
         <div style={{ fontFamily: "var(--font-display)", fontSize: 32, color: "var(--ink)" }}>
-          CHF {score.finalPortfolioValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          PPF {score.finalPortfolioValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </div>
         <div className="mt-1" style={{
           fontFamily: "var(--font-mono)", fontSize: 11,
           color: score.totalReturnPct >= 0 ? "#0f4a58" : "var(--coral)",
         }}>
-          {score.totalReturnPct >= 0 ? "+" : ""}{score.totalReturnPct.toFixed(1)}% total return on CHF {score.totalInvested.toLocaleString(undefined, { maximumFractionDigits: 0 })} invested
+          {score.totalReturnPct >= 0 ? "+" : ""}{score.totalReturnPct.toFixed(1)}% total return on PPF {score.totalInvested.toLocaleString(undefined, { maximumFractionDigits: 0 })} invested
         </div>
       </motion.div>
 

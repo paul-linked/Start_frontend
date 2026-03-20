@@ -35,7 +35,7 @@ export default function LandingPage() {
   const { dispatch } = useGame();
 
   return (
-    <div className="relative z-10 flex flex-col min-h-dvh" style={{ textShadow: "0 0 8px rgba(255,251,240,0.9), 0 0 4px rgba(255,251,240,0.9), 0 1px 3px rgba(255,251,240,0.8)" }}>
+    <div className="relative z-10 flex flex-col min-h-dvh" >
       {/* Top kicker */}
       <motion.div
         className="text-center pt-14 pb-2"
@@ -88,7 +88,7 @@ export default function LandingPage() {
         >
           Learn to invest.
           <br />
-          <span style={{ fontStyle: "normal" }}>Start with CHF 50.</span>
+          <span style={{ fontStyle: "normal" }}>Start with PPF 50.</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -108,7 +108,7 @@ export default function LandingPage() {
         >
           Six rounds. Six years of simulated investing.
           <br />
-          See what your CHF 50 could become.
+          See what your PPF 50 could become.
         </motion.p>
 
         {/* Divider */}
@@ -197,14 +197,13 @@ export default function LandingPage() {
         <motion.div className="mt-3 w-full max-w-xs"
           variants={fadeUp} initial="hidden" animate="visible" custom={9}>
           <Link href="/challenge" className="block w-full text-center cursor-pointer" style={{
-            background: "transparent", color: "var(--ink-2)",
+            background: "var(--ink)", color: "var(--bg)",
             border: "1px solid var(--rule)", borderRadius: "var(--radius-sm)",
             padding: "13px 24px", fontSize: 14, fontWeight: 500,
             fontFamily: "var(--font-body)", textDecoration: "none",
             transition: "background 0.15s",
           }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-dim)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
+            >
             Challenge Mode — The Gauntlet
           </Link>
         </motion.div>

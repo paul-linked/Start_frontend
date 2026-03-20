@@ -132,7 +132,7 @@ export default function ChaosAllocation() {
         variants={fadeUp} initial="hidden" animate="visible" custom={1}
       >
         <span style={{ fontSize: 12, color: "#3A6B2A", lineHeight: 1.6 }}>
-          💰 CHF {investableIncome.toLocaleString(undefined, { maximumFractionDigits: 0 })} invested over {yearsInRound} years (CHF {annualContribution.toLocaleString(undefined, { maximumFractionDigits: 0 })}/yr).
+          💰 PPF {investableIncome.toLocaleString(undefined, { maximumFractionDigits: 0 })} invested over {yearsInRound} years (PPF {annualContribution.toLocaleString(undefined, { maximumFractionDigits: 0 })}/yr).
         </span>
       </motion.div>
 
@@ -233,7 +233,7 @@ export default function ChaosAllocation() {
             fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 500,
             color: projectedReturn >= 0 ? "#0f4a58" : "var(--coral)",
           }}>
-            {projectedReturn >= 0 ? "+" : ""}CHF {projectedReturn.toFixed(0)}
+            {projectedReturn >= 0 ? "+" : ""}PPF {projectedReturn.toFixed(0)}
             <span style={{ fontSize: 10, opacity: 0.7, marginLeft: 3 }}>
               ({projectedPct >= 0 ? "+" : ""}{projectedPct.toFixed(1)}%)
             </span>

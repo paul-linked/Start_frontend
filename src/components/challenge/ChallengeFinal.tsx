@@ -86,7 +86,7 @@ export default function ChallengeFinal() {
       {/* Portfolio */}
       <div className="text-center">
         <div style={{ fontFamily: "var(--font-display)", fontSize: 26, color: "var(--ink)" }}>
-          CHF {state.portfolioValue.toFixed(2)}
+          PPF {state.portfolioValue.toFixed(2)}
         </div>
         <div className="mt-1" style={{
           fontFamily: "var(--font-mono)", fontSize: 11,

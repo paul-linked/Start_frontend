@@ -53,7 +53,7 @@ export default function CashInjection() {
         animate="visible"
         custom={1}
       >
-        +CHF {amount}
+        +PPF {amount}
       </motion.div>
 
       {/* Reason */}
@@ -88,7 +88,7 @@ export default function CashInjection() {
         animate="visible"
         custom={3}
       >
-        New portfolio: CHF {(state.portfolioValue + amount).toFixed(2)}
+        New portfolio: PPF {(state.portfolioValue + amount).toFixed(2)}
       </motion.p>
 
       {/* Decorative rule */}

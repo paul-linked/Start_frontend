@@ -91,7 +91,7 @@ export default function ChaosResultScreen() {
             fontFamily: "var(--font-mono)", fontSize: 15, fontWeight: 600,
             color: activeOutcome.financialDelta >= 0 ? "#3A6B2A" : "#8B3A2A",
           }}>
-            {deltaSign} CHF {deltaAbs.toLocaleString()}
+            {deltaSign} PPF {deltaAbs.toLocaleString()}
           </span>
         </motion.div>
       )}
@@ -110,7 +110,7 @@ export default function ChaosResultScreen() {
             Monthly income change
           </span>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, color: activeOutcome.incomeChange > 0 ? "#3A6B2A" : "#8B3A2A" }}>
-            {activeOutcome.incomeChange > 0 ? "+" : ""}CHF {activeOutcome.incomeChange.toLocaleString()}/mo
+            {activeOutcome.incomeChange > 0 ? "+" : ""}PPF {activeOutcome.incomeChange.toLocaleString()}/mo
           </span>
         </motion.div>
       )}
@@ -124,7 +124,7 @@ export default function ChaosResultScreen() {
           Portfolio value
         </div>
         <div style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "var(--ink)" }}>
-          CHF {portfolioValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          PPF {portfolioValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </div>
       </motion.div>
 

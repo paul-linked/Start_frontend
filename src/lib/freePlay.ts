@@ -62,7 +62,7 @@ const SNAP_POOL: { tier: "easy" | "medium" | "hard"; card: SnapCard }[] = [
           id: "small_bet", label: "Put a tiny amount in", description: "Just to see",
           quality: "neutral",
           feedback: "A small position limits your downside, but you're still acting on unverified information.",
-          learning: "The size of the bet doesn't change the quality of the thesis. A bad idea with CHF 10 is still a bad idea.",
+          learning: "The size of the bet doesn't change the quality of the thesis. A bad idea with PPF 10 is still a bad idea.",
           scoreImpact: { riskAlignment: -1, learning: 1 },
         },
         {
@@ -164,7 +164,7 @@ const SNAP_POOL: { tier: "easy" | "medium" | "hard"; card: SnapCard }[] = [
           id: "all_cash", label: "Move to cash until it passes", description: "Wait for stability",
           quality: "bad",
           feedback: "Cash is the worst place to be during high inflation — it loses value every day.",
-          learning: "At 5.2% inflation, CHF 100 in cash is worth CHF 94.80 in real terms after one year. Cash feels safe but is actively losing purchasing power.",
+          learning: "At 5.2% inflation, PPF 100 in cash is worth PPF 94.80 in real terms after one year. Cash feels safe but is actively losing purchasing power.",
           scoreImpact: { learning: -1, wealth: -2, riskAlignment: -2 },
         },
       ],
@@ -261,7 +261,7 @@ const BRIEFING_POOL: {
       paragraphs: [
         "Markets reacted sharply today as the tech giant announced its largest round of layoffs in company history, affecting roughly 8% of its global workforce.",
         "Social media erupted with predictions of further decline, with several retail investor forums advising immediate selling.",
-        "<mark>However, the restructuring is expected to save CHF 2.1B annually, and the company's core revenue segments grew 14% last quarter. Three major analysts upgraded the stock to 'buy' following the announcement, calling the layoffs 'a painful but necessary efficiency move.'</mark>",
+        "<mark>However, the restructuring is expected to save PPF 2.1B annually, and the company's core revenue segments grew 14% last quarter. Three major analysts upgraded the stock to 'buy' following the announcement, calling the layoffs 'a painful but necessary efficiency move.'</mark>",
       ],
     }],
     chartData: [30, 32, 35, 38, 42, 44, 40, 36, 28, 26],
@@ -376,12 +376,12 @@ function getInjection(roundNum: number): { amount: number; reason: string } | un
   // Every 3 rounds, money comes in
   if (roundNum % 3 === 0) {
     const reasons = [
-      "Monthly savings — CHF 75 added.",
-      "Tax refund! CHF 120 added to your portfolio.",
-      "Birthday money from family — CHF 100.",
-      "Freelance gig payout — CHF 200 added.",
-      "End-of-year bonus — CHF 150.",
-      "You cut a subscription — CHF 50 saved and invested.",
+      "Monthly savings — PPF 75 added.",
+      "Tax refund! PPF 120 added to your portfolio.",
+      "Birthday money from family — PPF 100.",
+      "Freelance gig payout — PPF 200 added.",
+      "End-of-year bonus — PPF 150.",
+      "You cut a subscription — PPF 50 saved and invested.",
     ];
     const amounts = [75, 120, 100, 200, 150, 50];
     const idx = Math.floor((roundNum / 3) - 1) % reasons.length;

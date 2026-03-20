@@ -50,7 +50,7 @@ function ChallengeRouter() {
               }}>
                 <div className="flex items-center justify-between">
                   <span style={{ fontFamily: "var(--font-display)", fontSize: 18, color: "var(--ink)" }}>
-                    CHF {state.portfolioValue.toFixed(2)}
+                    PPF {state.portfolioValue.toFixed(2)}
                   </span>
                   <span style={{
                     fontFamily: "var(--font-mono)", fontSize: 9,

@@ -9,7 +9,7 @@ export interface RandomOutcome {
   id: string;
   probability: number;          // 0.0–1.0; all outcomes within an option must sum to 1.0
   label: string;                // Short result label shown after resolution
-  financialDelta: number;       // Fixed CHF change (positive = gain, negative = loss)
+  financialDelta: number;       // Fixed PPF change (positive = gain, negative = loss)
   quality: "good" | "neutral" | "bad";
   feedback: string;             // What happened
   learning: string;             // The lesson
@@ -90,8 +90,8 @@ export interface ExtendedGameState {
   portfolioValue: number;
   portfolioHistory: number[];
   monthlyIncome: number;
-  totalInvested: number;        // cumulative CHF put into portfolio
-  totalWithdrawn: number;       // CHF taken out (mortgage down payments, emergencies)
+  totalInvested: number;        // cumulative PPF put into portfolio
+  totalWithdrawn: number;       // PPF taken out (mortgage down payments, emergencies)
   allocation: Record<string, number>;
   scores: Scores;
   xp: number;

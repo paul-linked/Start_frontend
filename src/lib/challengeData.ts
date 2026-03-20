@@ -78,7 +78,7 @@ export const CHALLENGE_PHASES: ChallengePhase[] = [
       {
         source: "Breaking News",
         headline: "Major European bank reports unexpected losses — contagion fears rise",
-        body: "Schweizerische Kreditanstalt reported a CHF 2.1B loss tied to derivatives exposure. Credit default swaps on European banks spiked to 2020 levels. Regulators issued a statement calling the banking system 'well-capitalized.'",
+        body: "Schweizerische Kreditanstalt reported a PPF 2.1B loss tied to derivatives exposure. Credit default swaps on European banks spiked to 2020 levels. Regulators issued a statement calling the banking system 'well-capitalized.'",
         icon: "🚨",
         iconColor: "#C0392B",
         time: "just now",

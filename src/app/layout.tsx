@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Wealth Manager Arena — The Investing Game",
   description:
-    "Learn to invest starting with CHF 50. A gamified investment education experience by PostFinance.",
+    "Learn to invest starting with PPF 50. A gamified investment education experience by PostFinance.",
 };
 
 export const viewport: Viewport = {

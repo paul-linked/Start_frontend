@@ -21,13 +21,13 @@ export default function ChallengePhaseResult() {
 
       <div className="mt-3 text-center py-5" style={{ borderTop: "2px solid var(--ink)", borderBottom: "1px solid var(--rule)" }}>
         <div style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 400, color: isPositive ? "#0f4a58" : "var(--coral)" }}>
-          {isPositive ? "+" : "−"}CHF {Math.abs(state.lastDelta).toFixed(2)}
+          {isPositive ? "+" : "−"}PPF {Math.abs(state.lastDelta).toFixed(2)}
         </div>
         <p className="mt-1.5" style={{ fontSize: 13, color: "var(--ink-3)" }}>
           {isPositive ? "Your portfolio grew" : "Markets pulled you down"}
         </p>
         <p className="mt-1" style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-4)" }}>
-          Balance: CHF {state.portfolioValue.toFixed(2)}
+          Balance: PPF {state.portfolioValue.toFixed(2)}
         </p>
       </div>
 

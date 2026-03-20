@@ -81,7 +81,7 @@ export default function ChaosRoundIntro() {
             Monthly income
           </span>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 500, color: "var(--ink)" }}>
-            CHF {round.monthlyIncome.toLocaleString()}
+            PPF {round.monthlyIncome.toLocaleString()}
           </span>
         </div>
         <div className="flex justify-between items-center mt-1.5">

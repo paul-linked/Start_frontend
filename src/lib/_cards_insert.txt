@@ -4,7 +4,7 @@
     id: "ma_snb_negative_rates",
     category: "macro",
     headline: "The SNB introduces negative interest rates. Your savings account charges you to hold cash.",
-    description: "Switzerland's central bank sets rates at -0.75%. Banks pass the cost to customers. Your CHF 50,000 in a savings account is now costing you CHF 375/year.",
+    description: "Switzerland's central bank sets rates at -0.75%. Banks pass the cost to customers. Your PPF 50,000 in a savings account is now costing you PPF 375/year.",
     emoji: "🏦",
     tip: "Negative rates are Switzerland's way of discouraging cash hoarding. The cure: invest in real assets.",
     options: [
@@ -22,7 +22,7 @@
         label: "Stay in cash anyway",
         description: "It feels safer. You'll deal with the fees.",
         outcomes: [
-          { id: "paid_fees", probability: 1.0, label: "Paid the negative rate 💸", financialDelta: -375, quality: "bad", feedback: "You paid CHF 375 to hold your own money. The SNB is not sorry.", learning: "Negative rates are a tax on inaction. When the central bank charges you to hold cash, it's a very loud signal to invest.", scoreImpact: { learning: 2, wealth: -1 } },
+          { id: "paid_fees", probability: 1.0, label: "Paid the negative rate 💸", financialDelta: -375, quality: "bad", feedback: "You paid PPF 375 to hold your own money. The SNB is not sorry.", learning: "Negative rates are a tax on inaction. When the central bank charges you to hold cash, it's a very loud signal to invest.", scoreImpact: { learning: 2, wealth: -1 } },
         ],
       },
     ],

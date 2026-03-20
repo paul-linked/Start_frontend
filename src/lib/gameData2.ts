@@ -37,7 +37,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
       {
         id: "listen_marco",
         label: "Listen to Marco",
-        description: "YOLO CHF 2,500 into DogeCoin. Marco says it's a sure thing.",
+        description: "YOLO PPF 2,500 into DogeCoin. Marco says it's a sure thing.",
         outcomes: [
           { id: "moon", probability: 0.25, label: "Moon mission 🚀", financialDelta: 3000, quality: "neutral", feedback: "You got lucky — it pumped. But you made a gambling decision, not an investment one. Marco is insufferable now.", learning: "A 25% win rate is still a 75% loss rate. Getting lucky on a speculative bet doesn't make it a reliable long-term strategy.", scoreImpact: { riskAlignment: -3, patience: -2 } },
           { id: "rug", probability: 0.75, label: "Rug pulled 💀", financialDelta: -2500, quality: "bad", feedback: "It crashed 80% overnight. Marco is suspiciously quiet. His girlfriend has moved on to a new coin.", learning: "Memecoins are driven largely by hype. When the hype dies, so does the price — fast and without warning.", scoreImpact: { riskAlignment: -4, wealth: -3 } },
@@ -48,7 +48,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Ignore Marco",
         description: "Smile, nod, and keep your money in your core portfolio.",
         outcomes: [
-          { id: "smart", probability: 0.85, label: "Dodged the bullet 🧠", financialDelta: 0, quality: "good", feedback: "DogeCoin crashed 80% two weeks later. Marco stopped talking about it. You kept your CHF 2,500.", learning: "The best investment decision is often avoiding unnecessary risks. Ignoring market noise is a valuable skill.", scoreImpact: { patience: 3, riskAlignment: 2 } },
+          { id: "smart", probability: 0.85, label: "Dodged the bullet 🧠", financialDelta: 0, quality: "good", feedback: "DogeCoin crashed 80% two weeks later. Marco stopped talking about it. You kept your PPF 2,500.", learning: "The best investment decision is often avoiding unnecessary risks. Ignoring market noise is a valuable skill.", scoreImpact: { patience: 3, riskAlignment: 2 } },
           { id: "fomo", probability: 0.15, label: "FOMO hit you anyway 😬", financialDelta: -500, quality: "bad", feedback: "You caved at the last minute and bought a tiny amount. It still crashed. Classic.", learning: "Fear Of Missing Out (FOMO) is a common enemy of rational investing. Straying from your plan usually carries a cost.", scoreImpact: { patience: -2, riskAlignment: -2 } },
         ],
       },
@@ -64,11 +64,11 @@ export const CHAOS_CARDS: ChaosCard[] = [
     options: [
       {
         id: "ape_in",
-        label: "Ape in CHF 500",
+        label: "Ape in PPF 500",
         description: "Tralalero Tralala said 'tung tung tung' and you felt it in your soul.",
         outcomes: [
           { id: "pump", probability: 0.2, label: "Tralalero pumped 🎉", financialDelta: 1800, quality: "neutral", feedback: "You made money, but you got lucky. The coin has no utility, no team, no roadmap. Tralalero Tralala is not a real person.", learning: "Even when a speculative coin pumps, it reinforces bad habits. The risk-to-reward ratio is rarely in your favor long-term.", scoreImpact: { riskAlignment: -3 } },
-          { id: "dump", probability: 0.8, label: "Tung tung tung 💀", financialDelta: -500, quality: "bad", feedback: "The creator sold their entire bag. You lost CHF 500 in 6 hours. Tralalero Tralala has already launched a new coin.", learning: "This resembles a 'rug pull' — where creators hype a token and dump it on retail investors. It's an inherent risk in unregulated spaces.", scoreImpact: { riskAlignment: -4, wealth: -2 } },
+          { id: "dump", probability: 0.8, label: "Tung tung tung 💀", financialDelta: -500, quality: "bad", feedback: "The creator sold their entire bag. You lost PPF 500 in 6 hours. Tralalero Tralala has already launched a new coin.", learning: "This resembles a 'rug pull' — where creators hype a token and dump it on retail investors. It's an inherent risk in unregulated spaces.", scoreImpact: { riskAlignment: -4, wealth: -2 } },
         ],
       },
       {
@@ -76,7 +76,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Google it first",
         description: "Who even is Tralalero Tralala? Let me check.",
         outcomes: [
-          { id: "avoided", probability: 0.9, label: "Avoided the trap 🧠", financialDelta: 0, quality: "good", feedback: "You Googled it. Tralalero Tralala is an AI-generated Italian brainrot character. The coin has no whitepaper. You kept your CHF 500.", learning: "Taking five minutes to research fundamentals can save you hundreds. If you can't explain what an asset does, reconsider buying it.", scoreImpact: { learning: 3, patience: 2 } },
+          { id: "avoided", probability: 0.9, label: "Avoided the trap 🧠", financialDelta: 0, quality: "good", feedback: "You Googled it. Tralalero Tralala is an AI-generated Italian brainrot character. The coin has no whitepaper. You kept your PPF 500.", learning: "Taking five minutes to research fundamentals can save you hundreds. If you can't explain what an asset does, reconsider buying it.", scoreImpact: { learning: 3, patience: 2 } },
           { id: "bought_anyway", probability: 0.1, label: "Bought it anyway 🤦", financialDelta: -500, quality: "bad", feedback: "You researched it, saw it was nonsense, and bought it anyway. The heart wants what it wants.", learning: "Knowing something is a high-risk gamble and doing it anyway is a common behavioral bias. Stick to the plan.", scoreImpact: { riskAlignment: -3, learning: -1 } },
         ],
       },
@@ -93,18 +93,18 @@ export const CHAOS_CARDS: ChaosCard[] = [
       {
         id: "buy_irony",
         label: "Buy the irony",
-        description: "CHF 300 on a pension joke. At least it's funny.",
+        description: "PPF 300 on a pension joke. At least it's funny.",
         outcomes: [
           { id: "ironic_win", probability: 0.3, label: "Ironic gains 😂", financialDelta: 600, quality: "neutral", feedback: "You made money on a joke coin. The universe has a sense of humor. Your financial advisor does not.", learning: "Irony doesn't change fundamentals. You got lucky on a meme.", scoreImpact: { riskAlignment: -2 } },
-          { id: "ironic_loss", probability: 0.7, label: "The joke's on you", financialDelta: -300, quality: "bad", feedback: "The coin died as fast as it was born. You lost CHF 300 on a pension joke. The real joke is that you could have put it in an actual pension.", learning: "The best joke here is that putting CHF 300 in a 3A pension fund would have potentially saved you taxes.", scoreImpact: { riskAlignment: -3, learning: 2 } },
+          { id: "ironic_loss", probability: 0.7, label: "The joke's on you", financialDelta: -300, quality: "bad", feedback: "The coin died as fast as it was born. You lost PPF 300 on a pension joke. The real joke is that you could have put it in an actual pension.", learning: "The best joke here is that putting PPF 300 in a 3A pension fund would have potentially saved you taxes.", scoreImpact: { riskAlignment: -3, learning: 2 } },
         ],
       },
       {
         id: "put_in_3a",
         label: "Put it in your 3A instead",
-        description: "CHF 300 into your actual pension. Less funny, more effective.",
+        description: "PPF 300 into your actual pension. Less funny, more effective.",
         outcomes: [
-          { id: "smart_move", probability: 1.0, label: "Tax-optimized 💎", financialDelta: 0, quality: "good", feedback: "You contributed CHF 300 to your 3A. Depending on your tax bracket, you saved roughly CHF 60-90 in taxes. 67Coin crashed 95%.", learning: "The 3A pension provides a statutory tax deduction, offering an immediate and guaranteed benefit that speculative coins cannot match.", scoreImpact: { riskAlignment: 3, learning: 2, wealth: 1 } },
+          { id: "smart_move", probability: 1.0, label: "Tax-optimized 💎", financialDelta: 0, quality: "good", feedback: "You contributed PPF 300 to your 3A. Depending on your tax bracket, you saved roughly PPF 60-90 in taxes. 67Coin crashed 95%.", learning: "The 3A pension provides a statutory tax deduction, offering an immediate and guaranteed benefit that speculative coins cannot match.", scoreImpact: { riskAlignment: 3, learning: 2, wealth: 1 } },
         ],
       },
     ],
@@ -115,7 +115,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "br_sigma_grindset",
     category: "brainrot",
     headline: "A 'sigma grindset' influencer says to skip your 3A pension.",
-    description: "'Real alphas don't need the government's permission to retire.' He's 22, lives with his parents, and sells a CHF 299 course called 'Escape the Matrix.'",
+    description: "'Real alphas don't need the government's permission to retire.' He's 22, lives with his parents, and sells a PPF 299 course called 'Escape the Matrix.'",
     emoji: "💪",
     options: [
       {
@@ -123,13 +123,13 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Ignore the sigma",
         description: "Keep contributing to your 3A like a normal person.",
         outcomes: [
-          { id: "smart", probability: 1.0, label: "Kept the tax break ✅", financialDelta: 0, quality: "good", feedback: "You kept contributing to your 3A. The tax deduction alone is worth it. The sigma influencer is now selling NFTs.", learning: "The Swiss 3A pension legally allows a tax deduction of up to CHF 7,056/year (as of recent limits). Turning down legal tax advantages is rarely a sound strategy.", scoreImpact: { learning: 3, riskAlignment: 2 } },
+          { id: "smart", probability: 1.0, label: "Kept the tax break ✅", financialDelta: 0, quality: "good", feedback: "You kept contributing to your 3A. The tax deduction alone is worth it. The sigma influencer is now selling NFTs.", learning: "The Swiss 3A pension legally allows a tax deduction of up to PPF 7,056/year (as of recent limits). Turning down legal tax advantages is rarely a sound strategy.", scoreImpact: { learning: 3, riskAlignment: 2 } },
         ],
       },
       {
         id: "follow_sigma",
         label: "Skip 3A, invest in yourself",
-        description: "Buy his CHF 299 course and skip your pension contribution.",
+        description: "Buy his PPF 299 course and skip your pension contribution.",
         outcomes: [
           { id: "wasted", probability: 0.9, label: "Lost the tax benefit 😬", financialDelta: -1100, quality: "bad", feedback: "You skipped your 3A and bought the course. The course was 4 hours of motivational quotes. You lost out on the tax deduction.", learning: "Missing a year of 3A contributions generally means permanently losing that year's specific tax deduction and its potential compounding.", scoreImpact: { learning: -2, riskAlignment: -2 } },
           { id: "inspired", probability: 0.1, label: "Got motivated 🤷", financialDelta: -299, quality: "neutral", feedback: "The course was thin on facts but you felt inspired for a week to work harder. You still lost the 3A tax benefit though.", learning: "Motivation is helpful, but ignoring structured tax advantages usually sets your net worth back.", scoreImpact: { patience: 1, riskAlignment: -1 } },
@@ -167,15 +167,15 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "br_fanum_tax",
     category: "brainrot",
     headline: "Your friend 'fanum taxed' your lunch money.",
-    description: "You lost CHF 15 to a meme. You're considering suing. Your lawyer says no. Marco thinks it's hilarious.",
+    description: "You lost PPF 15 to a meme. You're considering suing. Your lawyer says no. Marco thinks it's hilarious.",
     emoji: "🍕",
     options: [
       {
         id: "laugh_it_off",
         label: "Laugh it off",
-        description: "It's CHF 15. You'll survive.",
+        description: "It's PPF 15. You'll survive.",
         outcomes: [
-          { id: "fine", probability: 1.0, label: "Kept perspective 😂", financialDelta: 0, quality: "good", feedback: "You laughed it off. CHF 15 is not a systemic financial event. Your portfolio is fine.", learning: "Not every minor money loss needs a massive reaction. Keeping emotional perspective is healthy.", scoreImpact: { patience: 1 } },
+          { id: "fine", probability: 1.0, label: "Kept perspective 😂", financialDelta: 0, quality: "good", feedback: "You laughed it off. PPF 15 is not a systemic financial event. Your portfolio is fine.", learning: "Not every minor money loss needs a massive reaction. Keeping emotional perspective is healthy.", scoreImpact: { patience: 1 } },
         ],
       },
       {
@@ -183,7 +183,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Spiral into FOMO",
         description: "This is a sign. You need to make money fast. Time to find a hot coin.",
         outcomes: [
-          { id: "spiral", probability: 0.9, label: "Spiraled into FOMO 😱", financialDelta: -500, quality: "bad", feedback: "You went down a rabbit hole and bought a random coin to 'make it back.' You lost CHF 500.", learning: "Chasing small losses with high-risk bets is a dangerous behavioral loop known as 'revenge trading'.", scoreImpact: { patience: -3, riskAlignment: -2 } },
+          { id: "spiral", probability: 0.9, label: "Spiraled into FOMO 😱", financialDelta: -500, quality: "bad", feedback: "You went down a rabbit hole and bought a random coin to 'make it back.' You lost PPF 500.", learning: "Chasing small losses with high-risk bets is a dangerous behavioral loop known as 'revenge trading'.", scoreImpact: { patience: -3, riskAlignment: -2 } },
           { id: "lucky_spiral", probability: 0.1, label: "Lucky spiral 🍀", financialDelta: 200, quality: "neutral", feedback: "You got lucky and actually made a quick return. However, your decision process was flawed.", learning: "Getting a positive outcome from a flawed, emotionally-driven process can unfortunately reinforce bad habits.", scoreImpact: { patience: -2, riskAlignment: -2 } },
         ],
       },
@@ -195,7 +195,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "sc_crypto_recovery",
     category: "scam",
     headline: "An email promises to recover your lost crypto — for a small fee.",
-    description: "'We specialize in blockchain forensics. Send us CHF 200 and we'll recover your lost funds.' You never lost any crypto. Marco's girlfriend forwarded it to you.",
+    description: "'We specialize in blockchain forensics. Send us PPF 200 and we'll recover your lost funds.' You never lost any crypto. Marco's girlfriend forwarded it to you.",
     emoji: "🎣",
     options: [
       {
@@ -203,15 +203,15 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Delete it",
         description: "This is obviously a scam.",
         outcomes: [
-          { id: "safe", probability: 1.0, label: "Deleted it 🗑️", financialDelta: 0, quality: "good", feedback: "You ignored the scam. Your CHF 200 stays in your pocket.", learning: "Crypto recovery scams prey on desperation. Blockchain transactions are generally immutable; no random company can 'reverse' them.", scoreImpact: { learning: 2 } },
+          { id: "safe", probability: 1.0, label: "Deleted it 🗑️", financialDelta: 0, quality: "good", feedback: "You ignored the scam. Your PPF 200 stays in your pocket.", learning: "Crypto recovery scams prey on desperation. Blockchain transactions are generally immutable; no random company can 'reverse' them.", scoreImpact: { learning: 2 } },
         ],
       },
       {
         id: "pay_fee",
-        label: "Pay the CHF 200 fee",
+        label: "Pay the PPF 200 fee",
         description: "Maybe they can actually help? The email looks professional.",
         outcomes: [
-          { id: "scammed", probability: 0.95, label: "Scammed 😬", financialDelta: -200, quality: "bad", feedback: "They took your CHF 200 and disappeared. There was no recovery service.", learning: "If a stranger online asks for an upfront fee to recover lost assets, it is almost universally a secondary scam.", scoreImpact: { learning: 3, wealth: -1 } },
+          { id: "scammed", probability: 0.95, label: "Scammed 😬", financialDelta: -200, quality: "bad", feedback: "They took your PPF 200 and disappeared. There was no recovery service.", learning: "If a stranger online asks for an upfront fee to recover lost assets, it is almost universally a secondary scam.", scoreImpact: { learning: 3, wealth: -1 } },
           { id: "lucky_escape", probability: 0.05, label: "They ghosted before charging", financialDelta: 0, quality: "neutral", feedback: "They never followed up with the payment link. You got lucky, but your vulnerability was exposed.", learning: "Willingness to pay upfront fees to unknown entities is a vulnerability. Always verify through official channels.", scoreImpact: { learning: 2 } },
         ],
       },
@@ -221,7 +221,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "sc_investment_guru",
     category: "scam",
     headline: "A 'certified investment guru' offers a 40% guaranteed return.",
-    description: "He has a Lamborghini in his profile picture and a 'proprietary algorithm.' Minimum investment: CHF 5,000. Marco already invested.",
+    description: "He has a Lamborghini in his profile picture and a 'proprietary algorithm.' Minimum investment: PPF 5,000. Marco already invested.",
     emoji: "🏎️",
     tip: "In finance, risk and return are strongly correlated. High guarantees usually mean high deception.",
     options: [
@@ -230,12 +230,12 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Smell the scam",
         description: "No legitimate investment guarantees 40%.",
         outcomes: [
-          { id: "avoided", probability: 1.0, label: "Smelled the scam 👃", financialDelta: 0, quality: "good", feedback: "You didn't invest. The 'guru' was arrested 3 months later for running a Ponzi scheme. Marco lost CHF 5,000.", learning: "The risk-free rate in Switzerland is historically low. Anyone promising 'guaranteed' double-digit returns is defying the laws of finance.", scoreImpact: { learning: 3, riskAlignment: 2 } },
+          { id: "avoided", probability: 1.0, label: "Smelled the scam 👃", financialDelta: 0, quality: "good", feedback: "You didn't invest. The 'guru' was arrested 3 months later for running a Ponzi scheme. Marco lost PPF 5,000.", learning: "The risk-free rate in Switzerland is historically low. Anyone promising 'guaranteed' double-digit returns is defying the laws of finance.", scoreImpact: { learning: 3, riskAlignment: 2 } },
         ],
       },
       {
         id: "invest_guru",
-        label: "Invest CHF 5,000",
+        label: "Invest PPF 5,000",
         description: "Marco says it's legit. The Lamborghini looks real.",
         outcomes: [
           { id: "ponzi", probability: 0.85, label: "Ponzi'd 💸", financialDelta: -5000, quality: "bad", feedback: "The returns were paid from new investors' money. When it collapsed, you lost everything.", learning: "Ponzi schemes pay early investors with new capital. They mathematically must collapse eventually.", scoreImpact: { wealth: -4, learning: 2 } },
@@ -266,7 +266,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         description: "You want to see how the scam works without sending money.",
         outcomes: [
           { id: "wasted_time", probability: 0.8, label: "Wasted time ⏱️", financialDelta: 0, quality: "neutral", feedback: "You dragged it out for a month before blocking them. It was funny, but a waste of your time.", learning: "Engaging with scammers flags your number as 'active', potentially leading to more spam.", scoreImpact: { learning: 1 } },
-          { id: "accidentally_phished", probability: 0.2, label: "Clicked a bad link 😬", financialDelta: -300, quality: "bad", feedback: "They sent a link that harvested your login session. You lost CHF 300 before freezing your cards.", learning: "Modern phishing attacks can be highly sophisticated. Engaging with bad actors always carries technical risks.", scoreImpact: { learning: -2, wealth: -1 } }
+          { id: "accidentally_phished", probability: 0.2, label: "Clicked a bad link 😬", financialDelta: -300, quality: "bad", feedback: "They sent a link that harvested your login session. You lost PPF 300 before freezing your cards.", learning: "Modern phishing attacks can be highly sophisticated. Engaging with bad actors always carries technical risks.", scoreImpact: { learning: -2, wealth: -1 } }
         ]
       }
     ]
@@ -275,7 +275,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "sc_fake_estv",
     category: "scam",
     headline: "URGENT: Email from the Swiss Tax Authority (ESTV).",
-    description: "'You have an unpaid tax debt of CHF 1,250. Pay immediately via the link below or face prosecution.' It has the official logo.",
+    description: "'You have an unpaid tax debt of PPF 1,250. Pay immediately via the link below or face prosecution.' It has the official logo.",
     emoji: "⚠️",
     options: [
       {
@@ -291,7 +291,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Click and pay immediately",
         description: "You don't want to mess with the tax authorities.",
         outcomes: [
-          { id: "phished", probability: 1.0, label: "Phished 🎣", financialDelta: -1250, quality: "bad", feedback: "You entered your credit card details. The scammers charged you CHF 1,250.", learning: "Artificial urgency is a classic scammer tactic. Always verify alarming financial messages through independent channels.", scoreImpact: { learning: 2, wealth: -1 } }
+          { id: "phished", probability: 1.0, label: "Phished 🎣", financialDelta: -1250, quality: "bad", feedback: "You entered your credit card details. The scammers charged you PPF 1,250.", learning: "Artificial urgency is a classic scammer tactic. Always verify alarming financial messages through independent channels.", scoreImpact: { learning: 2, wealth: -1 } }
         ]
       }
     ]
@@ -302,13 +302,13 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "so_fomo_ipo",
     category: "social",
     headline: "Everyone at work is buying into a hot IPO.",
-    description: "The company makes AI-powered dog food. Valuation: CHF 4 billion. Revenue: CHF 2 million. Your colleagues are already planning their yachts.",
+    description: "The company makes AI-powered dog food. Valuation: PPF 4 billion. Revenue: PPF 2 million. Your colleagues are already planning their yachts.",
     emoji: "🐶",
     options: [
       {
         id: "buy_ipo",
         label: "Buy the IPO",
-        description: "CHF 2,000 in. AI dog food sounds like the future.",
+        description: "PPF 2,000 in. AI dog food sounds like the future.",
         outcomes: [
           { id: "pop", probability: 0.3, label: "IPO popped 🎉", financialDelta: 2000, quality: "neutral", feedback: "You made money, but the valuation was speculative. You got lucky. Your colleagues are insufferable.", learning: "IPO 'pops' happen, but many newly public companies experience high volatility. Ensure you understand the underlying business.", scoreImpact: { riskAlignment: -2, patience: -1 } },
           { id: "crash", probability: 0.7, label: "IPO crashed 📉", financialDelta: -1500, quality: "bad", feedback: "The AI dog food company struggled to scale. The stock dropped 80% in 3 months.", learning: "Valuations that completely detach from underlying business fundamentals often carry much higher risk.", scoreImpact: { riskAlignment: -3, wealth: -2 } },
@@ -329,7 +329,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "so_influencer_portfolio",
     category: "social",
     headline: "A finance influencer posts their 'transparent' portfolio.",
-    description: "They claim to be up 300% this year. They're sharing their exact positions. 'I just want to help people.' They also sell a CHF 299 course.",
+    description: "They claim to be up 300% this year. They're sharing their exact positions. 'I just want to help people.' They also sell a PPF 299 course.",
     emoji: "📱",
     options: [
       {
@@ -355,7 +355,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "so_st_moritz_trip",
     category: "social",
     headline: "Your friends invite you to a weekend in St. Moritz.",
-    description: "It's peak season. The hotel is CHF 800/night. The ski pass is CHF 100. Marco is going and already bought a Moncler jacket.",
+    description: "It's peak season. The hotel is PPF 800/night. The ski pass is PPF 100. Marco is going and already bought a Moncler jacket.",
     emoji: "⛷️",
     options: [
       {
@@ -363,7 +363,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Go and enjoy the luxury",
         description: "You only live once, right?",
         outcomes: [
-          { id: "broke_but_happy", probability: 1.0, label: "Expensive memories 💸", financialDelta: -2500, quality: "neutral", feedback: "You had fun, but spent CHF 2,500 in three days. You also felt pressured to buy a round of CHF 30 cocktails.", learning: "Social pressure can be a significant driver of lifestyle inflation. Balancing memories with budget constraints is an ongoing challenge.", scoreImpact: { wealth: -2, patience: -1 } }
+          { id: "broke_but_happy", probability: 1.0, label: "Expensive memories 💸", financialDelta: -2500, quality: "neutral", feedback: "You had fun, but spent PPF 2,500 in three days. You also felt pressured to buy a round of PPF 30 cocktails.", learning: "Social pressure can be a significant driver of lifestyle inflation. Balancing memories with budget constraints is an ongoing challenge.", scoreImpact: { wealth: -2, patience: -1 } }
         ]
       },
       {
@@ -371,7 +371,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Propose a cheaper alternative",
         description: "Suggest a day trip to Flumserberg instead.",
         outcomes: [
-          { id: "reasonable_fun", probability: 0.7, label: "Sensible skiing 🏔️", financialDelta: -200, quality: "good", feedback: "Half the group agreed to Flumserberg. You skied all day, had a great time, and saved CHF 2,300.", learning: "Offering budget-friendly alternatives is a practical way to maintain a social life without compromising financial goals.", scoreImpact: { wealth: 2, patience: 2 } },
+          { id: "reasonable_fun", probability: 0.7, label: "Sensible skiing 🏔️", financialDelta: -200, quality: "good", feedback: "Half the group agreed to Flumserberg. You skied all day, had a great time, and saved PPF 2,300.", learning: "Offering budget-friendly alternatives is a practical way to maintain a social life without compromising financial goals.", scoreImpact: { wealth: 2, patience: 2 } },
           { id: "went_alone", probability: 0.3, label: "Missed out 🤷", financialDelta: 0, quality: "neutral", feedback: "They went to St. Moritz anyway. You stayed home and saved money, but felt a bit left out.", learning: "Sometimes protecting your wealth involves experiencing FOMO. That's a normal part of financial discipline.", scoreImpact: { patience: 1 } }
         ]
       }
@@ -380,7 +380,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "so_wagyu_split",
     category: "social",
-    headline: "Group dinner. Marco orders a CHF 150 Wagyu steak.",
+    headline: "Group dinner. Marco orders a PPF 150 Wagyu steak.",
     description: "You had a salad and tap water. At the end, Marco casually says, 'Should we just split the bill evenly?'",
     emoji: "🥩",
     options: [
@@ -389,7 +389,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Just pay it",
         description: "It's not worth making a scene over money.",
         outcomes: [
-          { id: "resentment", probability: 1.0, label: "Subsidized Marco 💸", financialDelta: -100, quality: "bad", feedback: "You paid CHF 130 for a CHF 30 meal. You feel resentful, and Marco got cheap Wagyu.", learning: "Avoiding awkward conversations can cost you money over time. Establishing financial boundaries with friends is healthy.", scoreImpact: { patience: -1, wealth: -1 } }
+          { id: "resentment", probability: 1.0, label: "Subsidized Marco 💸", financialDelta: -100, quality: "bad", feedback: "You paid PPF 130 for a PPF 30 meal. You feel resentful, and Marco got cheap Wagyu.", learning: "Avoiding awkward conversations can cost you money over time. Establishing financial boundaries with friends is healthy.", scoreImpact: { patience: -1, wealth: -1 } }
         ]
       },
       {
@@ -407,7 +407,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "ls_luxury_watch",
     category: "lifestyle",
-    headline: "You're tempted by a CHF 8,000 Swiss watch.",
+    headline: "You're tempted by a PPF 8,000 Swiss watch.",
     description: "'It might hold its value,' you tell yourself. Marco has the same watch.",
     emoji: "⌚",
     options: [
@@ -416,23 +416,23 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Buy the watch",
         description: "You want it, and you've saved for it.",
         outcomes: [
-          { id: "bought", probability: 1.0, label: "Bought the watch ⌚", financialDelta: -8000, quality: "neutral", feedback: "You bought the watch. It brings you joy, but your investable cash drops by CHF 8,000.", learning: "While some specific luxury watches appreciate, the vast majority act as depreciating consumer goods. Treat it as an expense, not a guaranteed investment.", scoreImpact: { wealth: -2, riskAlignment: -1 } },
+          { id: "bought", probability: 1.0, label: "Bought the watch ⌚", financialDelta: -8000, quality: "neutral", feedback: "You bought the watch. It brings you joy, but your investable cash drops by PPF 8,000.", learning: "While some specific luxury watches appreciate, the vast majority act as depreciating consumer goods. Treat it as an expense, not a guaranteed investment.", scoreImpact: { wealth: -2, riskAlignment: -1 } },
         ],
       },
       {
         id: "skip_watch",
         label: "Skip it and invest",
-        description: "Put that CHF 8,000 to work in the market instead.",
+        description: "Put that PPF 8,000 to work in the market instead.",
         outcomes: [
-          { id: "skipped", probability: 1.0, label: "Skipped it 💪", financialDelta: 0, quality: "good", feedback: "You invested the CHF 8,000 instead, giving it the potential to compound over time.", learning: "Every large purchase carries an opportunity cost. CHF 8,000 invested historically has the potential to grow significantly over decades.", scoreImpact: { wealth: 2, patience: 3 } },
+          { id: "skipped", probability: 1.0, label: "Skipped it 💪", financialDelta: 0, quality: "good", feedback: "You invested the PPF 8,000 instead, giving it the potential to compound over time.", learning: "Every large purchase carries an opportunity cost. PPF 8,000 invested historically has the potential to grow significantly over decades.", scoreImpact: { wealth: 2, patience: 3 } },
         ],
       },
       {
         id: "buy_cheaper",
-        label: "Buy a CHF 200 watch",
+        label: "Buy a PPF 200 watch",
         description: "Satisfy the need for a timepiece affordably.",
         outcomes: [
-          { id: "sensible", probability: 1.0, label: "Sensible choice ⏱️", financialDelta: -200, quality: "good", feedback: "You bought a decent watch for CHF 200 and kept your remaining savings.", learning: "Satisfying a desire at a fraction of the cost frees up capital for other financial goals.", scoreImpact: { wealth: 1, patience: 2 } },
+          { id: "sensible", probability: 1.0, label: "Sensible choice ⏱️", financialDelta: -200, quality: "good", feedback: "You bought a decent watch for PPF 200 and kept your remaining savings.", learning: "Satisfying a desire at a fraction of the cost frees up capital for other financial goals.", scoreImpact: { wealth: 1, patience: 2 } },
         ],
       },
     ],
@@ -474,7 +474,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "ls_subscription_audit",
     category: "lifestyle",
     headline: "You realize you have 14 active subscriptions.",
-    description: "Streaming, meal kits, an app for meditation, cloud storage... It's costing you CHF 250 a month.",
+    description: "Streaming, meal kits, an app for meditation, cloud storage... It's costing you PPF 250 a month.",
     emoji: "📱",
     options: [
       {
@@ -482,7 +482,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Ruthless Audit",
         description: "Cancel everything you don't use weekly.",
         outcomes: [
-          { id: "saved_money", probability: 1.0, label: "Freed up cash ✂️", financialDelta: 0, quality: "good", feedback: "You cancelled several subscriptions, saving CHF 150/month.", learning: "Subscription creep is stealthy. Periodically auditing recurring expenses helps plug slow leaks in your budget.", scoreImpact: { wealth: 2, patience: 2 }, incomeChange: 150 }
+          { id: "saved_money", probability: 1.0, label: "Freed up cash ✂️", financialDelta: 0, quality: "good", feedback: "You cancelled several subscriptions, saving PPF 150/month.", learning: "Subscription creep is stealthy. Periodically auditing recurring expenses helps plug slow leaks in your budget.", scoreImpact: { wealth: 2, patience: 2 }, incomeChange: 150 }
         ]
       },
       {
@@ -490,7 +490,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Keep them, just in case",
         description: "You might start using that meditation app next month. Really.",
         outcomes: [
-          { id: "wasted_money", probability: 1.0, label: "Death by a thousand cuts 💸", financialDelta: -1800, quality: "bad", feedback: "Over the year, you spent nearly CHF 2,000 on services you barely touched.", learning: "Unused recurring expenses drag down your ability to save and invest. If you aren't using it, pause it.", scoreImpact: { wealth: -2, patience: -1 } }
+          { id: "wasted_money", probability: 1.0, label: "Death by a thousand cuts 💸", financialDelta: -1800, quality: "bad", feedback: "Over the year, you spent nearly PPF 2,000 on services you barely touched.", learning: "Unused recurring expenses drag down your ability to save and invest. If you aren't using it, pause it.", scoreImpact: { wealth: -2, patience: -1 } }
         ]
       }
     ]
@@ -499,7 +499,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "ls_get_a_dog",
     category: "lifestyle",
     headline: "You really want a dog. A cute French Bulldog.",
-    description: "The puppy costs CHF 2,500. But the real costs are the vet bills, food, insurance, and doggy daycare.",
+    description: "The puppy costs PPF 2,500. But the real costs are the vet bills, food, insurance, and doggy daycare.",
     emoji: "🐶",
     options: [
       {
@@ -507,7 +507,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
         label: "Buy the puppy",
         description: "You can't put a price on companionship.",
         outcomes: [
-          { id: "expensive_love", probability: 1.0, label: "Joy and Vet Bills ❤️", financialDelta: -6000, quality: "neutral", feedback: "You love the dog, but it costs you roughly CHF 3,000 a year in ongoing care. Your savings rate drops slightly.", learning: "Pets bring immense joy but are a significant financial commitment. Properly budgeting for their lifelong care is essential.", scoreImpact: { wealth: -1, patience: 1 }, incomeChange: -250 }
+          { id: "expensive_love", probability: 1.0, label: "Joy and Vet Bills ❤️", financialDelta: -6000, quality: "neutral", feedback: "You love the dog, but it costs you roughly PPF 3,000 a year in ongoing care. Your savings rate drops slightly.", learning: "Pets bring immense joy but are a significant financial commitment. Properly budgeting for their lifelong care is essential.", scoreImpact: { wealth: -1, patience: 1 }, incomeChange: -250 }
         ]
       },
       {
@@ -588,12 +588,12 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "ma_strong_franc",
     category: "macro",
     headline: "The Swiss Franc strengthens significantly against the Euro and USD.",
-    description: "Great for your upcoming vacation! However, your globally diversified ETF is priced in foreign currencies, so its CHF value drops on paper.",
+    description: "Great for your upcoming vacation! However, your globally diversified ETF is priced in foreign currencies, so its PPF value drops on paper.",
     emoji: "💱",
     options: [
       {
         id: "panic_hedge",
-        label: "Switch to CHF-hedged equity funds",
+        label: "Switch to PPF-hedged equity funds",
         description: "Try to eliminate currency fluctuations going forward.",
         outcomes: [
           { id: "paid_fees", probability: 1.0, label: "Locked in costs 📉", financialDelta: -800, quality: "neutral", feedback: "You switched to a hedged fund. You reduced currency volatility, but generally increased your ongoing fund fees.", learning: "Currency hedging for global equities adds costs and complexity. Over very long horizons, many investors accept the currency fluctuations.", scoreImpact: { patience: -1, learning: 1 } }
@@ -642,7 +642,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "wp_bonus",
     category: "workplace",
-    headline: "You received a CHF 5,000 year-end bonus.",
+    headline: "You received a PPF 5,000 year-end bonus.",
     description: "Your boss says you've earned it. Marco already spent his on a watch.",
     emoji: "💰",
     options: [
@@ -701,8 +701,8 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "wp_salary_raise",
     category: "workplace",
-    headline: "You negotiated a CHF 800/month raise.",
-    description: "Now you have an extra CHF 800 every month. What's the plan?",
+    headline: "You negotiated a PPF 800/month raise.",
+    description: "Now you have an extra PPF 800 every month. What's the plan?",
     emoji: "📈",
     options: [
       {
@@ -753,7 +753,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "lu_inheritance",
     category: "lucky",
-    headline: "A distant relative left you CHF 20,000.",
+    headline: "A distant relative left you PPF 20,000.",
     description: "You have a sudden lump sum of cash. Marco's girlfriend says you should put it in crypto.",
     emoji: "🎁",
     options: [
@@ -768,7 +768,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
       {
         id: "split_inheritance",
         label: "Invest most, keep some",
-        description: "CHF 15,000 invested, CHF 5,000 for a personal goal.",
+        description: "PPF 15,000 invested, PPF 5,000 for a personal goal.",
         outcomes: [
           { id: "split", probability: 1.0, label: "Balanced approach ⚖️", financialDelta: 15000, quality: "good", feedback: "You invested most of it and kept a portion for something meaningful.", learning: "Allocating a windfall thoughtfully allows you to improve your financial future while also enjoying the present.", scoreImpact: { wealth: 3, patience: 1 } },
         ],
@@ -787,8 +787,8 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "lu_tax_refund",
     category: "lucky",
-    headline: "You got a CHF 2,400 tax refund.",
-    description: "You have CHF 2,400 you weren't expecting. It's burning a hole in your pocket.",
+    headline: "You got a PPF 2,400 tax refund.",
+    description: "You have PPF 2,400 you weren't expecting. It's burning a hole in your pocket.",
     emoji: "🧾",
     options: [
       {
@@ -839,7 +839,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "li_mortgage",
     category: "life",
-    headline: "You're looking to buy an apartment. Down payment: CHF 120,000.",
+    headline: "You're looking to buy an apartment. Down payment: PPF 120,000.",
     description: "Swiss banks typically require 20% down. It means liquidating part of your portfolio or using your pension.",
     emoji: "🏡",
     minAge: 30,
@@ -867,7 +867,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "li_health_emergency",
     category: "life",
-    headline: "A health issue results in CHF 8,000 of out-of-pocket costs.",
+    headline: "A health issue results in PPF 8,000 of out-of-pocket costs.",
     description: "Deductibles and uncovered treatments add up quickly. Do you have the cash on hand?",
     emoji: "🏥",
     options: [
@@ -892,7 +892,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "li_child",
     category: "life",
-    headline: "You're having a child! Also: CHF 2,000/month in new expenses.",
+    headline: "You're having a child! Also: PPF 2,000/month in new expenses.",
     description: "Childcare, supplies, and healthcare. Your monthly budget is about to change significantly.",
     emoji: "👶",
     minAge: 28,
@@ -949,7 +949,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "li_new_car",
     category: "life",
     headline: "You need a replacement car for your daily commute.",
-    description: "Options range from a CHF 5,000 used economy car to a CHF 45,000 luxury EV lease.",
+    description: "Options range from a PPF 5,000 used economy car to a PPF 45,000 luxury EV lease.",
     emoji: "🚙",
     options: [
       {
@@ -1225,13 +1225,13 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "cl_stock_split",
     category: "classic",
     headline: "A popular company announces a 10-for-1 stock split.",
-    description: "The share price will drop from CHF 1,000 to CHF 100. Some commentators say it's now a 'bargain'.",
+    description: "The share price will drop from PPF 1,000 to PPF 100. Some commentators say it's now a 'bargain'.",
     emoji: "🍕",
     options: [
       {
         id: "buy_the_split",
         label: "Buy because the price is 'lower'",
-        description: "CHF 100 per share feels much more affordable.",
+        description: "PPF 100 per share feels much more affordable.",
         outcomes: [
           { id: "illusion", probability: 1.0, label: "Price vs. Value 🤦", financialDelta: 0, quality: "bad", feedback: "You bought more based on the split. The company's total market value didn't change, only the number of shares.", learning: "A stock split changes the price per share but not the valuation of the company. A lower share price doesn't inherently make a stock 'cheaper'.", scoreImpact: { learning: -2 } }
         ]
@@ -1278,17 +1278,17 @@ export const CHAOS_CARDS: ChaosCard[] = [
   {
     id: "ab_coworker_startup",
     category: "social",
-    headline: "A coworker wants you to invest CHF 10,000 in their startup.",
+    headline: "A coworker wants you to invest PPF 10,000 in their startup.",
     description: "It's an app that delivers artisanal cheese via drone. The prototype recently crashed.",
     emoji: "🧀",
     tip: "Venture capital and angel investing carry extraordinarily high risks of total loss.",
     options: [
       {
         id: "invest_startup",
-        label: "Invest the CHF 10,000",
+        label: "Invest the PPF 10,000",
         description: "You believe in the team (and the cheese).",
         outcomes: [
-          { id: "failed", probability: 0.8, label: "Startup failed 💀", financialDelta: -10000, quality: "bad", feedback: "The startup ran out of funds. You lost your entire CHF 10,000 investment.", learning: "A significant percentage of early-stage startups fail. Such investments should generally only be made with capital you can afford to lose entirely.", scoreImpact: { wealth: -3, riskAlignment: -2 } },
+          { id: "failed", probability: 0.8, label: "Startup failed 💀", financialDelta: -10000, quality: "bad", feedback: "The startup ran out of funds. You lost your entire PPF 10,000 investment.", learning: "A significant percentage of early-stage startups fail. Such investments should generally only be made with capital you can afford to lose entirely.", scoreImpact: { wealth: -3, riskAlignment: -2 } },
           { id: "acquired", probability: 0.2, label: "Unexpected success 🎉", financialDelta: 25000, quality: "neutral", feedback: "A larger company bought the startup for its drone technology. You made a profit.", learning: "While angel investments occasionally pay off, the statistical probability is against you. Treat it as high-risk speculation.", scoreImpact: { riskAlignment: -1, wealth: 2 } },
         ],
       },
@@ -1306,12 +1306,12 @@ export const CHAOS_CARDS: ChaosCard[] = [
     id: "ab_lottery_ticket",
     category: "lucky",
     headline: "The lottery jackpot is huge. People are buying tickets.",
-    description: "Your odds are roughly 1 in 30 million. Marco bought CHF 200 worth of tickets.",
+    description: "Your odds are roughly 1 in 30 million. Marco bought PPF 200 worth of tickets.",
     emoji: "🎰",
     options: [
       {
         id: "bought_tickets",
-        label: "Buy CHF 50 in tickets",
+        label: "Buy PPF 50 in tickets",
         description: "It's fun to dream about winning.",
         outcomes: [
           { id: "won_nothing", probability: 0.9999, label: "Won nothing 🎟️", financialDelta: -50, quality: "bad", feedback: "You won nothing. The money is gone.", learning: "Lotteries have a negative expected return. They are a form of entertainment, not a component of a financial plan.", scoreImpact: { patience: -1 } },
@@ -1320,7 +1320,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
       },
       {
         id: "invest_instead",
-        label: "Invest the CHF 50 instead",
+        label: "Invest the PPF 50 instead",
         description: "Put that money into your standard portfolio.",
         outcomes: [
           { id: "invested", probability: 1.0, label: "Guaranteed participation 📈", financialDelta: 50, quality: "good", feedback: "You invested the money. It's less exciting than a lottery draw, but far more reliable.", learning: "Redirecting 'entertainment' spending toward investments is a slow, steady way to build predictable wealth over time.", scoreImpact: { patience: 2, wealth: 1 } },
@@ -1338,7 +1338,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
       {
         id: "buy_truth",
         label: "Buy the AI Token",
-        description: "CHF 500. Maybe the AI knows something we don't.",
+        description: "PPF 500. Maybe the AI knows something we don't.",
         outcomes: [
           { id: "ai_rug", probability: 0.85, label: "Algorithmic Drop 💀", financialDelta: -500, quality: "bad", feedback: "The AI executed a programmed mass sell-off. The token's value collapsed.", learning: "A speculative token managed by code is still a highly speculative asset. Novelty does not equal underlying economic value.", scoreImpact: { riskAlignment: -3, wealth: -1 } },
           { id: "ai_pump", probability: 0.15, label: "Trending Algorithm 🚀", financialDelta: 1500, quality: "neutral", feedback: "The token trended on social media and spiked in value before you sold.", learning: "You profited off short-term social media trends. This is momentum trading, not fundamental investing.", scoreImpact: { riskAlignment: -2 } }
@@ -1364,7 +1364,7 @@ export const CHAOS_CARDS: ChaosCard[] = [
       {
         id: "try_stuffing",
         label: "Try physical cash stuffing",
-        description: "Withdraw CHF 2,000 and use physical envelopes.",
+        description: "Withdraw PPF 2,000 and use physical envelopes.",
         outcomes: [
           { id: "inflation_burn", probability: 0.9, label: "Inefficient storage 📉", financialDelta: -50, quality: "bad", feedback: "Your cash is uninvested and you occasionally forget the right envelope at home.", learning: "While physical cash can curb extreme overspending, it misses out on any interest and carries physical loss risks.", scoreImpact: { learning: -1 } },
           { id: "lost_binder", probability: 0.1, label: "Physical loss 😱", financialDelta: -2000, quality: "bad", feedback: "You misplaced your 'Rent' envelope. The cash is gone.", learning: "Storing large amounts of physical cash introduces significant risks of loss or theft compared to insured bank accounts.", scoreImpact: { wealth: -2, riskAlignment: -2 } }

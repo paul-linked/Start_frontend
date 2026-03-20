@@ -383,7 +383,7 @@ export default function Allocation() {
             fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 500,
             color: projectedReturn >= 0 ? "#0f4a58" : "var(--coral)",
           }}>
-            {projectedReturn >= 0 ? "+" : ""}CHF {projectedReturn.toFixed(2)}
+            {projectedReturn >= 0 ? "+" : ""}PPF {projectedReturn.toFixed(2)}
             <span style={{ fontSize: 10, opacity: 0.7, marginLeft: 3 }}>
               ({projectedPct >= 0 ? "+" : ""}{projectedPct.toFixed(1)}%)
             </span>

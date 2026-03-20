@@ -169,7 +169,7 @@ export default function EndScreen() {
       {/* Wealth */}
       <motion.div className="text-center" variants={fadeUp} initial="hidden" animate="visible" custom={5}>
         <div style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "var(--ink)" }}>
-          CHF {state.portfolioValue.toFixed(2)}
+          PPF {state.portfolioValue.toFixed(2)}
         </div>
         <div className="mt-1" style={{
           fontFamily: "var(--font-mono)", fontSize: 11,
@@ -193,14 +193,14 @@ export default function EndScreen() {
         <div className="flex justify-center gap-6">
           <div className="text-center">
             <div style={{ fontSize: 14, fontWeight: 500, color: "#0f4a58" }}>
-              CHF {state.portfolioValue.toFixed(0)}
+              PPF {state.portfolioValue.toFixed(0)}
             </div>
             <div style={{ fontSize: 10, color: "var(--ink-4)" }}>Your portfolio</div>
           </div>
           <div style={{ width: 1, background: "var(--rule)" }} />
           <div className="text-center">
             <div style={{ fontSize: 14, fontWeight: 500, color: "var(--ink-4)" }}>
-              CHF {savingsFinal.toFixed(0)}
+              PPF {savingsFinal.toFixed(0)}
             </div>
             <div style={{ fontSize: 10, color: "var(--ink-4)" }}>Savings only</div>
           </div>
@@ -213,7 +213,7 @@ export default function EndScreen() {
           <span style={{
             fontFamily: "var(--font-mono)", fontSize: 9,
             textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-4)",
-          }}>Your CHF 50 Journey</span>
+          }}>Your PPF 50 Journey</span>
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1" style={{ fontSize: 9, fontFamily: "var(--font-mono)", color: "var(--ink-5)" }}>
               <span style={{ width: 10, height: 2, background: "#0f4a58", display: "inline-block", borderRadius: 1 }} /> You

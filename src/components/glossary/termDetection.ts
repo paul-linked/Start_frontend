@@ -32,7 +32,7 @@ export function detectTerms(
   let position = 0;
   
   while (position < text.length) {
-    let matchFound = false;
+    let matPPFound = false;
     
     // Try to match longest possible term at current position
     for (const term of allTerms) {
@@ -61,14 +61,14 @@ export function detectTerms(
           });
           
           position += term.length;
-          matchFound = true;
+          matPPFound = true;
           break;
         }
       }
     }
     
     // No term matched - add character to plain text
-    if (!matchFound) {
+    if (!matPPFound) {
       const char = text[position];
       
       // Merge with previous text segment if exists

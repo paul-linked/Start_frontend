@@ -42,7 +42,7 @@ export default function ChallengePhaseIntro() {
           textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-4)", marginBottom: 4,
         }}>Current portfolio</div>
         <div style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "var(--ink)" }}>
-          CHF {state.portfolioValue.toFixed(2)}
+          PPF {state.portfolioValue.toFixed(2)}
         </div>
       </div>
 

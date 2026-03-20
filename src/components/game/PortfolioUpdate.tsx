@@ -146,7 +146,7 @@ function AnimatedNumber({ target, prefix = "", suffix = "" }: { target: number; 
   return (
     <span>
       {prefix}
-      {isNeg ? "−" : "+"}CHF {Math.abs(display).toFixed(2)}
+      {isNeg ? "−" : "+"}PPF {Math.abs(display).toFixed(2)}
       {suffix}
     </span>
   );
@@ -226,7 +226,7 @@ export default function PortfolioUpdate() {
             color: "var(--ink-4)",
           }}
         >
-          Balance: CHF {state.portfolioValue.toFixed(2)}
+          Balance: PPF {state.portfolioValue.toFixed(2)}
         </p>
       </motion.div>
 
@@ -285,10 +285,10 @@ export default function PortfolioUpdate() {
             }}
           >
             <span>
-              You: <span style={{ color: "var(--green)", fontWeight: 500 }}>CHF {state.portfolioValue.toFixed(0)}</span>
+              You: <span style={{ color: "var(--green)", fontWeight: 500 }}>PPF {state.portfolioValue.toFixed(0)}</span>
             </span>
             <span>
-              Savings only: <span style={{ color: "var(--ink-4)" }}>CHF {savingsValue.toFixed(0)}</span>
+              Savings only: <span style={{ color: "var(--ink-4)" }}>PPF {savingsValue.toFixed(0)}</span>
             </span>
           </div>
         </motion.div>

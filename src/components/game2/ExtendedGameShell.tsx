@@ -23,7 +23,7 @@ function ExtendedTopbar() {
           Age {age} · Round {currentRound}
         </div>
         <div style={{ fontFamily: "var(--font-display)", fontSize: 16, color: "var(--ink)", marginTop: 1 }}>
-          CHF {portfolioValue.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+          PPF {portfolioValue.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
         </div>
       </div>
       <div style={{ display: "flex", gap: 8 }}>

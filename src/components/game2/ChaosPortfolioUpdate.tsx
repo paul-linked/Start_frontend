@@ -53,7 +53,7 @@ export default function ChaosPortfolioUpdate() {
         style={{ fontFamily: "var(--font-display)", fontSize: 36, color: "var(--ink)" }}
         variants={fadeUp} initial="hidden" animate="visible" custom={1}
       >
-        CHF {current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        PPF {current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </motion.div>
 
       <motion.div
@@ -64,7 +64,7 @@ export default function ChaosPortfolioUpdate() {
         }}
         variants={fadeUp} initial="hidden" animate="visible" custom={2}
       >
-        {delta >= 0 ? "+" : ""}CHF {delta.toFixed(2)} ({deltaPct >= 0 ? "+" : ""}{deltaPct.toFixed(1)}% over {yearsInRound} years)
+        {delta >= 0 ? "+" : ""}PPF {delta.toFixed(2)} ({deltaPct >= 0 ? "+" : ""}{deltaPct.toFixed(1)}% over {yearsInRound} years)
       </motion.div>
 
       {/* Sparkline */}

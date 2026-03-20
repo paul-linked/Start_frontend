@@ -83,13 +83,13 @@ export const ROUNDS: Round[] = [
     kicker: "Year One",
     title: "The First Step",
     description:
-      "You have CHF 50 left over this month. It's not much — but it's yours. What will you do with it?",
+      "You have PPF 50 left over this month. It's not much — but it's yours. What will you do with it?",
     quest: {
       type: "snap_decision",
       cards: [
         {
           id: "1a",
-          headline: "Your flatmate says CHF 50 is too little to invest.",
+          headline: "Your flatmate says PPF 50 is too little to invest.",
           description: "\"Bro, just buy a nice dinner,\" he says, already Googling restaurants. What do you do?",
           options: [
             {
@@ -99,7 +99,7 @@ export const ROUNDS: Round[] = [
               quality: "good",
               feedback: "Smart. Your flatmate will have a great evening. You'll have a better decade.",
               learning:
-                "Compound interest doesn't care about starting size. CHF 50 growing at 7% annually doubles to CHF 100 in about 10 years — and that's before you add anything else.",
+                "Compound interest doesn't care about starting size. PPF 50 growing at 7% annually doubles to PPF 100 in about 10 years — and that's before you add anything else.",
               scoreImpact: s(0, 1, 0, 2, 1),
             },
             {
@@ -117,9 +117,9 @@ export const ROUNDS: Round[] = [
               label: "Fine, dinner it is 🍝",
               description: "YOLO, you only live once",
               quality: "bad",
-              feedback: "Delicious. But that pasta could have been CHF 85 in 8 years. Hope it was worth it.",
+              feedback: "Delicious. But that pasta could have been PPF 85 in 8 years. Hope it was worth it.",
               learning:
-                "Small amounts feel insignificant today, but money has a time value. CHF 50 now is worth more than CHF 50 in the future because of what it could earn in between.",
+                "Small amounts feel insignificant today, but money has a time value. PPF 50 now is worth more than PPF 50 in the future because of what it could earn in between.",
               scoreImpact: s(0, 0, -1, 0, -1),
             },
           ],
@@ -153,7 +153,7 @@ export const ROUNDS: Round[] = [
         },
         {
           id: "1c",
-          headline: "Where do you put your first CHF 50?",
+          headline: "Where do you put your first PPF 50?",
           description: "Account open. Three options stare back at you. Choose wisely — or at least better than your uncle did in 2001.",
           options: [
             {
@@ -181,7 +181,7 @@ export const ROUNDS: Round[] = [
               label: "Your friend's crypto tip",
               description: "They say it's about to moon 🚀",
               quality: "bad",
-              feedback: "Speculating on tips with your only CHF 50 isn't investing — it's gambling.",
+              feedback: "Speculating on tips with your only PPF 50 isn't investing — it's gambling.",
               learning:
                 "Investing means putting money into assets with a reasonable expectation of growth over time. A friend's 'hot tip' has no research behind it. This is speculation, not strategy.",
               scoreImpact: s(-1, -2, -1, 0, -1),
@@ -212,7 +212,7 @@ export const ROUNDS: Round[] = [
     marketReturns: { savings: 0.5, bonds: 2.1, etf: 8.4 },
     injection: {
       amount: 100,
-      reason: "Happy birthday! Your family gave you CHF 100.",
+      reason: "Happy birthday! Your family gave you PPF 100.",
     },
   },
 
@@ -459,7 +459,7 @@ export const ROUNDS: Round[] = [
     marketReturns: { savings: 0.5, bonds: 1.5, etf: 11.4 },
     injection: {
       amount: 150,
-      reason: "End-of-year bonus! CHF 150 added to your portfolio.",
+      reason: "End-of-year bonus! PPF 150 added to your portfolio.",
     },
   },
 
@@ -595,7 +595,7 @@ export const PROFILE_LABELS = {
 
 // ─── Post-round insights (keyed by round id) ───
 export const ROUND_INSIGHTS: Record<number, string> = {
-  1: "Your CHF 50 has entered the market. It's not much yet — but it's already doing more than sitting in your wallet.",
+  1: "Your PPF 50 has entered the market. It's not much yet — but it's already doing more than sitting in your wallet.",
   2: "Your money is now spread across real assets. Notice how different products grow at different speeds.",
   3: "The crash tested your nerves. Watch your line versus the savings line — the gap tells the real story.",
   4: "Year four. Small, consistent decisions are compounding. See how the gap between your line and savings is widening?",

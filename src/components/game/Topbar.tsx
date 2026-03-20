@@ -1,152 +1,144 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useGame } from "@/lib/GameContext";
 import { TOTAL_ROUNDS } from "@/lib/gameData";
 
-function MiniSparkline({ data }: { data: number[] }) {
+// ─── Mini Sparkline ───
+function Sparkline({ data }: { data: number[] }) {
   if (data.length < 2) return null;
 
   const min = Math.min(...data) * 0.95;
   const max = Math.max(...data) * 1.05;
   const range = max - min || 1;
-  const w = 72;
-  const h = 20;
+  const w = 64;
+  const h = 24;
 
   const points = data
     .map((val, i) => {
       const x = (i / (data.length - 1)) * w;
-      const y = h - ((val - min) / range) * h;
+      const y = h - 2 - ((val - min) / range) * (h - 4);
       return `${x},${y}`;
     })
     .join(" ");
+
+  const lastX = ((data.length - 1) / Math.max(data.length - 1, 1)) * w;
+  const lastY = h - 2 - ((data[data.length - 1] - min) / range) * (h - 4);
+  const isUp = data[data.length - 1] >= data[0];
 
   return (
     <svg width={w} height={h} className="shrink-0">
       <polyline
         points={points}
         fill="none"
-        stroke="var(--green-muted)"
+        stroke={isUp ? "#0f4a58" : "var(--coral)"}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* Current point dot */}
-      {data.length > 0 && (
-        <circle
-          cx={(((data.length - 1) / Math.max(data.length - 1, 1)) * w)}
-          cy={h - ((data[data.length - 1] - min) / range) * h}
-          r="2.5"
-          fill="var(--green)"
-        />
-      )}
+      <circle cx={lastX} cy={lastY} r="2.5" fill={isUp ? "#0f4a58" : "var(--coral)"} />
     </svg>
+  );
+}
+
+// ─── Score Ring (mini donut showing average score) ───
+function ScoreRing({ score }: { score: number }) {
+  const size = 28;
+  const r = 10;
+  const circumference = 2 * Math.PI * r;
+  const filled = (score / 100) * circumference;
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--rule)" strokeWidth="3" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#0f4a58" strokeWidth="3"
+          strokeDasharray={`${filled} ${circumference - filled}`}
+          strokeDashoffset={circumference / 4}
+          strokeLinecap="round"
+          style={{ transition: "stroke-dasharray 0.4s ease" }}
+        />
+      </svg>
+      <span style={{
+        fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 500, color: "var(--ink-2)",
+      }}>
+        {score}
+      </span>
+    </div>
   );
 }
 
 export default function Topbar() {
   const { state } = useGame();
-  const progress = (state.currentRound / TOTAL_ROUNDS) * 100;
   const isPositive = state.portfolioValue >= state.totalDeposited;
   const returnPct =
-    ((state.portfolioValue - state.totalDeposited) / state.totalDeposited) *
-    100;
+    ((state.portfolioValue - state.totalDeposited) / state.totalDeposited) * 100;
+
+  // Average score across all 5 metrics
+  const avgScore = Math.round(
+    Object.values(state.scores).reduce((s, v) => s + v, 0) / Object.values(state.scores).length
+  );
+
+  // In free play, show actual round number
+  const roundDisplay = state.freePlay
+    ? `Year ${state.currentRound}`
+    : `${state.currentRound} / ${TOTAL_ROUNDS}`;
+
+  const progress = state.freePlay
+    ? 100
+    : (state.currentRound / TOTAL_ROUNDS) * 100;
 
   return (
-    <div
-      className="sticky top-0 z-20"
-      style={{
-        background: "rgba(253, 250, 242, 0.92)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        borderBottom: "1px solid var(--rule)",
-        padding: "12px 22px",
-      }}
-    >
-      {/* Wealth row */}
-      <div className="flex items-baseline justify-between">
-        <div className="flex items-baseline gap-2.5">
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={state.portfolioValue}
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: 20,
-                color: "var(--ink)",
-              }}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.25 }}
-            >
-              PFF {state.portfolioValue.toFixed(2)}
-            </motion.span>
-          </AnimatePresence>
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              fontWeight: 500,
-              color: isPositive ? "var(--green)" : "var(--coral)",
-            }}
-          >
-            {isPositive ? "+" : ""}
-            {returnPct.toFixed(1)}%
-          </span>
+    <div className="sticky top-0 z-20" style={{
+      background: "rgba(245, 240, 232, 0.92)",
+      backdropFilter: "blur(16px)",
+      WebkitBackdropFilter: "blur(16px)",
+      borderBottom: "1px solid var(--rule)",
+      padding: "10px 20px",
+    }}>
+      {/* Main row */}
+      <div className="flex items-center justify-between">
+        {/* Left: Portfolio value + return */}
+        <div>
+          <div className="flex items-baseline gap-2">
+            <span style={{
+              fontFamily: "var(--font-display)", fontSize: 18, color: "var(--ink)",
+            }}>
+              CHF {state.portfolioValue.toFixed(2)}
+            </span>
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 500,
+              color: isPositive ? "#0f4a58" : "var(--coral)",
+            }}>
+              {isPositive ? "+" : ""}{returnPct.toFixed(1)}%
+            </span>
+          </div>
         </div>
 
-        <MiniSparkline data={state.portfolioHistory} />
+        {/* Right: Sparkline + Score */}
+        <div className="flex items-center gap-3">
+          <Sparkline data={state.portfolioHistory} />
+          <ScoreRing score={avgScore} />
+        </div>
       </div>
 
-      {/* Meta row */}
-      <div
-        className="flex items-center justify-between mt-2 pt-2"
-        style={{ borderTop: "1px solid var(--rule-light)" }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 9,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: "var(--ink-4)",
-          }}
-        >
-          Round {state.currentRound} of {TOTAL_ROUNDS}
+      {/* Progress row */}
+      <div className="flex items-center gap-3 mt-2">
+        <span style={{
+          fontFamily: "var(--font-mono)", fontSize: 8,
+          textTransform: "uppercase", letterSpacing: "0.1em",
+          color: "var(--ink-4)", whiteSpace: "nowrap",
+        }}>
+          {roundDisplay}
         </span>
 
-        {/* Progress */}
-        <div
-          className="flex-1 mx-4"
-          style={{
-            height: 2,
-            background: "var(--rule)",
-            borderRadius: 1,
-            overflow: "hidden",
-          }}
-        >
-          <motion.div
-            style={{
-              height: "100%",
-              background: "var(--ink-3)",
-              borderRadius: 1,
-            }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-          />
+        <div className="flex-1" style={{
+          height: 2, background: "var(--rule)", borderRadius: 1, overflow: "hidden",
+        }}>
+          <div style={{
+            height: "100%", background: "var(--ink-3)", borderRadius: 1,
+            width: `${progress}%`, transition: "width 0.4s ease",
+          }} />
         </div>
-
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 9,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: "var(--ink-4)",
-          }}
-        >
-          {state.xp} xp
-        </span>
       </div>
     </div>
   );

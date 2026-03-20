@@ -45,25 +45,14 @@ function GameRouter({ onContinueToExtended }: { onContinueToExtended: (portfolio
     <>
       <AlpineBackground />
       <div style={{
-        maxWidth: 440, margin: "0 auto",
-        position: "relative", zIndex: 1,
+        maxWidth: 440,
+        margin: "0 auto",
+        position: "relative",
+        zIndex: 1,
         minHeight: "100dvh",
-        padding: isLanding ? 0 : "12px 10px",
       }}>
-        {isLanding ? (
-          <div style={{ minHeight: "100dvh" }}>
-            <LandingPage />
-          </div>
-        ) : (
-          <div style={{
-            background: "#FFFBF0", borderRadius: 24,
-            boxShadow: "0 2px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03)",
-            position: "relative", minHeight: "calc(100dvh - 24px)", paddingBottom: 1,
-          }}>
-            {showTopbar && <Topbar />}
-            <CurrentScreen />
-          </div>
-        )}
+        {showTopbar && <Topbar />}
+        <CurrentScreen />
       </div>
     </>
   );

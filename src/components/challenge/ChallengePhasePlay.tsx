@@ -205,7 +205,7 @@ export default function ChallengePhasePlay() {
                   <motion.p style={{ fontFamily: "var(--font-display)", fontSize: 15, fontStyle: "italic", color: "var(--ink)", marginTop: 2 }}
                     animate={{ opacity: [0.7, 1, 0.7] }} transition={{ duration: 2.5, repeat: Infinity }}>How do you react?</motion.p>
                 </div>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 18, color: "var(--ink)" }}>CHF {state.portfolioValue.toFixed(0)}</div>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 18, color: "var(--ink)" }}>PPF {state.portfolioValue.toFixed(0)}</div>
               </div>
 
               <div style={{ border: "1px solid var(--rule)", borderRadius: "var(--radius)", overflow: "hidden" }}>
