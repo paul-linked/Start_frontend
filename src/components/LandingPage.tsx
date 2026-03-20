@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useGame } from "@/lib/GameContext";
+import Link from "next/link"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -191,6 +192,22 @@ export default function LandingPage() {
         >
           Begin Your Journey
         </motion.button>
+
+        {/* Challenge CTA */}
+        <motion.div className="mt-3 w-full max-w-xs"
+          variants={fadeUp} initial="hidden" animate="visible" custom={9}>
+          <Link href="/challenge" className="block w-full text-center cursor-pointer" style={{
+            background: "transparent", color: "var(--ink-2)",
+            border: "1px solid var(--rule)", borderRadius: "var(--radius-sm)",
+            padding: "13px 24px", fontSize: 14, fontWeight: 500,
+            fontFamily: "var(--font-body)", textDecoration: "none",
+            transition: "background 0.15s",
+          }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-dim)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
+            Challenge Mode — The Gauntlet
+          </Link>
+        </motion.div>
 
         {/* Secondary */}
         <motion.p
