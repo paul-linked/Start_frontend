@@ -199,11 +199,17 @@ export default function ChallengeFinal() {
           Try Again
         </button>
 
-        <button className="w-full mt-2.5 cursor-pointer active:scale-[0.97] transition-transform" style={{
-          background: "#fecb03", color: "var(--ink)", border: "none", borderRadius: "var(--radius-sm)",
-          padding: "14px 24px", fontSize: 14, fontWeight: 500, fontFamily: "var(--font-body)",
-        }}>
-          Open PostFinance Account
+        <button
+          className="w-full mt-2.5 cursor-pointer active:scale-[0.97] transition-transform"
+          style={{
+            background: "#fecb03", color: "var(--ink)",
+            border: "none", borderRadius: "var(--radius-sm)",
+            padding: "14px 24px", fontSize: 14, fontWeight: 500,
+            fontFamily: "var(--font-body)",
+          }}
+          onClick={() => window.open("https://www.postfinance.ch/en/about-us/commitment/education/popcorn--finance--the-podcast-from-postfinance.html", "_blank")}
+        >
+          Popcorn & Finance by PostFinance
         </button>
 
         <div className="text-center mt-3">
