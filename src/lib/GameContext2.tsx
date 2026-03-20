@@ -103,7 +103,8 @@ function extendedReducer(state: ExtendedState, action: ExtendedAction): Extended
     case "START_ROUND": {
       const round = CHAOS_ROUNDS[state.currentRound - 1];
       if (!round) return state;
-      const cards = drawCards(round);
+      const seenIds = state.resolvedEvents.map((e) => e.cardId);
+      const cards = drawCards(round, seenIds);
       return {
         ...state,
         screen: "chaos_card",
@@ -174,22 +175,37 @@ function extendedReducer(state: ExtendedState, action: ExtendedAction): Extended
       const round = CHAOS_ROUNDS[state.currentRound - 1];
       if (!round) return state;
 
-      // Apply market returns to portfolio
       const alloc = action.allocation;
-      let weightedReturn = 0;
+
+      // Weighted annual return for this allocation
+      let annualReturn = 0;
       for (const [assetId, pct] of Object.entries(alloc)) {
         const ret = round.marketReturns[assetId] ?? 0;
-        weightedReturn += (pct / 100) * ret;
+        annualReturn += (pct / 100) * ret;
       }
 
-      // Add investable income for this round
-      const investableIncome = round.monthlyIncome * 12 * round.investableIncomePct;
-      const marketGain = state.portfolioValue * weightedReturn;
-      const newPortfolio = Math.round((state.portfolioValue + investableIncome + marketGain) * 100) / 100;
+      // Number of years this round covers (gap to next round, or 2 for final rounds)
+      const nextRound = CHAOS_ROUNDS[state.currentRound]; // may be undefined for last round
+      const yearsInRound = nextRound ? nextRound.age - round.age : 2;
+
+      // Compound the existing portfolio over yearsInRound years
+      const compoundedPortfolio = state.portfolioValue * Math.pow(1 + annualReturn, yearsInRound);
+
+      // Invest monthly income each year, compounding the contributions made in earlier years
+      // Each year's contribution earns returns for the remaining years in the round
+      const annualContribution = round.monthlyIncome * 12 * round.investableIncomePct;
+      let contributionGrowth = 0;
+      for (let y = 0; y < yearsInRound; y++) {
+        const yearsRemaining = yearsInRound - y - 1;
+        contributionGrowth += annualContribution * Math.pow(1 + annualReturn, yearsRemaining);
+      }
+      const totalInvestedThisRound = annualContribution * yearsInRound;
+
+      const newPortfolio = Math.round((compoundedPortfolio + contributionGrowth) * 100) / 100;
+      const marketGain = newPortfolio - state.portfolioValue - totalInvestedThisRound;
 
       // Diversification score
       const vals = Object.values(alloc).filter((v) => v > 0);
-      const n = vals.length;
       const totalAlloc = vals.reduce((a, b) => a + b, 0) || 1;
       const hhi = vals.reduce((s, v) => s + (v / totalAlloc) ** 2, 0);
       const divBonus = Math.round((1 - hhi) * 8);
@@ -211,7 +227,7 @@ function extendedReducer(state: ExtendedState, action: ExtendedAction): Extended
         allocation: alloc,
         portfolioValue: newPortfolio,
         portfolioHistory: [...state.portfolioHistory, newPortfolio],
-        totalInvested: state.totalInvested + investableIncome,
+        totalInvested: state.totalInvested + totalInvestedThisRound,
         scores: newScores,
         screen: "portfolio_update",
       };

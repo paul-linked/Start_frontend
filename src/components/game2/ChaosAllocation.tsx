@@ -84,24 +84,34 @@ export default function ChaosAllocation() {
   const riskTarget = round.riskTarget;
   const overRisk = highRiskPct > riskTarget.maxHighRiskPct;
 
-  // Projected return
+  const nextRound = CHAOS_ROUNDS[state.currentRound]; // may be undefined for last round
+  const yearsInRound = nextRound ? nextRound.age - round.age : 2;
+  const annualContribution = round.monthlyIncome * 12 * round.investableIncomePct;
+  const totalContributions = annualContribution * yearsInRound;
+
+  // Projected return: compound existing portfolio + contributions over yearsInRound
   const projectedReturn = useMemo(() => {
-    let ret = 0;
+    let annualRet = 0;
     for (const id of assets) {
-      ret += ((alloc[id] || 0) / 100) * (round.marketReturns[id] ?? 0);
+      annualRet += ((alloc[id] || 0) / 100) * (round.marketReturns[id] ?? 0);
     }
-    return ret * state.portfolioValue;
-  }, [alloc, assets, round, state.portfolioValue]);
+    const compounded = state.portfolioValue * Math.pow(1 + annualRet, yearsInRound);
+    let contribGrowth = 0;
+    for (let y = 0; y < yearsInRound; y++) {
+      contribGrowth += annualContribution * Math.pow(1 + annualRet, yearsInRound - y - 1);
+    }
+    return compounded + contribGrowth - state.portfolioValue - totalContributions;
+  }, [alloc, assets, round, state.portfolioValue, yearsInRound, annualContribution, totalContributions]);
 
   const projectedPct = useMemo(() => {
-    let ret = 0;
+    let annualRet = 0;
     for (const id of assets) {
-      ret += ((alloc[id] || 0) / 100) * ((round.marketReturns[id] ?? 0) * 100);
+      annualRet += ((alloc[id] || 0) / 100) * (round.marketReturns[id] ?? 0);
     }
-    return ret;
-  }, [alloc, assets, round]);
+    return (Math.pow(1 + annualRet, yearsInRound) - 1) * 100;
+  }, [alloc, assets, round, yearsInRound]);
 
-  const investableIncome = round.monthlyIncome * 12 * round.investableIncomePct;
+  const investableIncome = totalContributions;
 
   return (
     <div className="px-5 pb-8 pt-4">
@@ -122,7 +132,7 @@ export default function ChaosAllocation() {
         variants={fadeUp} initial="hidden" animate="visible" custom={1}
       >
         <span style={{ fontSize: 12, color: "#3A6B2A", lineHeight: 1.6 }}>
-          💰 CHF {investableIncome.toLocaleString(undefined, { maximumFractionDigits: 0 })} of your annual income is being invested this round.
+          💰 CHF {investableIncome.toLocaleString(undefined, { maximumFractionDigits: 0 })} invested over {yearsInRound} years (CHF {annualContribution.toLocaleString(undefined, { maximumFractionDigits: 0 })}/yr).
         </span>
       </motion.div>
 

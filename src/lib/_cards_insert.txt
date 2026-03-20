@@ -1,0 +1,29 @@
+
+  // ── MACRO / SERIOUS ──
+  {
+    id: "ma_snb_negative_rates",
+    category: "macro",
+    headline: "The SNB introduces negative interest rates. Your savings account charges you to hold cash.",
+    description: "Switzerland's central bank sets rates at -0.75%. Banks pass the cost to customers. Your CHF 50,000 in a savings account is now costing you CHF 375/year.",
+    emoji: "🏦",
+    tip: "Negative rates are Switzerland's way of discouraging cash hoarding. The cure: invest in real assets.",
+    options: [
+      {
+        id: "move_to_investments",
+        label: "Move cash into investments",
+        description: "Negative rates are a signal: cash is trash. Time to invest.",
+        outcomes: [
+          { id: "smart_move", probability: 0.75, label: "Escaped the negative rate trap ✅", financialDelta: 2000, quality: "good", feedback: "You moved your cash into a diversified portfolio. Your money works for you instead of against you.", learning: "Negative interest rates are a policy tool to push money into the real economy. When cash costs money, investing becomes even more attractive.", scoreImpact: { riskAlignment: 2, learning: 2, wealth: 2 } },
+          { id: "market_dip", probability: 0.25, label: "Invested into a dip 😅", financialDelta: -500, quality: "neutral", feedback: "You invested and markets dipped shortly after. But you're still better off than paying negative rates on cash.", learning: "Even investing at a slight market peak beats paying negative rates on cash over the long term.", scoreImpact: { patience: 1 } },
+        ],
+      },
+      {
+        id: "stay_in_cash",
+        label: "Stay in cash anyway",
+        description: "It feels safer. You'll deal with the fees.",
+        outcomes: [
+          { id: "paid_fees", probability: 1.0, label: "Paid the negative rate 💸", financialDelta: -375, quality: "bad", feedback: "You paid CHF 375 to hold your own money. The SNB is not sorry.", learning: "Negative rates are a tax on inaction. When the central bank charges you to hold cash, it's a very loud signal to invest.", scoreImpact: { learning: 2, wealth: -1 } },
+        ],
+      },
+    ],
+  },

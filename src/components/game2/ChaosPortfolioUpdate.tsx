@@ -15,6 +15,8 @@ export default function ChaosPortfolioUpdate() {
   const { state, dispatch } = useExtendedGame();
   const round = CHAOS_ROUNDS[state.currentRound - 1];
   const isLastRound = state.currentRound >= CHAOS_ROUNDS.length;
+  const nextRound = CHAOS_ROUNDS[state.currentRound];
+  const yearsInRound = nextRound ? nextRound.age - (round?.age ?? 0) : 2;
 
   const history = state.portfolioHistory;
   const current = history[history.length - 1] ?? 0;
@@ -43,7 +45,7 @@ export default function ChaosPortfolioUpdate() {
         style={{ fontFamily: "var(--font-mono)", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--ink-4)" }}
         variants={fadeUp} initial="hidden" animate="visible" custom={0}
       >
-        Age {state.age} · Portfolio Update
+        Age {state.age} · {yearsInRound}-Year Portfolio Update
       </motion.span>
 
       <motion.div
@@ -62,7 +64,7 @@ export default function ChaosPortfolioUpdate() {
         }}
         variants={fadeUp} initial="hidden" animate="visible" custom={2}
       >
-        {delta >= 0 ? "+" : ""}CHF {delta.toFixed(2)} ({deltaPct >= 0 ? "+" : ""}{deltaPct.toFixed(1)}% this round)
+        {delta >= 0 ? "+" : ""}CHF {delta.toFixed(2)} ({deltaPct >= 0 ? "+" : ""}{deltaPct.toFixed(1)}% over {yearsInRound} years)
       </motion.div>
 
       {/* Sparkline */}
