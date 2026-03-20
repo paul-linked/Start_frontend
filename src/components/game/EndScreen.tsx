@@ -119,7 +119,7 @@ function JourneyChart({ player, savings }: { player: number[]; savings: number[]
 
 // ─── Main ───
 export default function EndScreen() {
-  const { state, dispatch } = useGame();
+  const { state } = useGame();
   const profile = calculateProfile(state);
   const savingsFinal = state.savingsHistory[Math.min(state.savingsHistory.length - 1, state.portfolioHistory.length - 1)] ?? state.totalDeposited;
   const isDemo = !state.freePlay;
@@ -246,7 +246,7 @@ export default function EndScreen() {
 
       {/* ── Actions ── */}
       <motion.div className="mt-8" variants={fadeUp} initial="hidden" animate="visible" custom={9}>
-        {/* Continue Playing — primary action */}
+        {/* Continue to The Long Game */}
         <button
           className="w-full cursor-pointer active:scale-[0.97] transition-transform"
           style={{
@@ -255,9 +255,12 @@ export default function EndScreen() {
             padding: "14px 24px", fontSize: 14, fontWeight: 500,
             fontFamily: "var(--font-body)",
           }}
-          onClick={() => dispatch({ type: "CONTINUE_FREE_PLAY" })}
+          onClick={() => {
+            const cb = (window as unknown as Record<string, unknown>).__extendedGameContinue as ((p: number) => void) | undefined;
+            if (cb) cb(state.portfolioValue);
+          }}
         >
-          {isDemo ? "Continue Playing" : "Continue"}
+          The Long Game →
         </button>
 
         {/* PostFinance CTA */}

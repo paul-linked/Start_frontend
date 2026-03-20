@@ -4,21 +4,25 @@ import type { Scores } from "./index";
 // EXTENDED GAME TYPES — Mode 2 (The Long Game)
 // ═══════════════════════════════════════════════════════════════
 
-// ─── Probabilistic outcome on a chaos/life card ───
+// ─── A single probabilistic outcome within a player option ───
 export interface RandomOutcome {
   id: string;
-  probability: number;          // 0.0–1.0; all outcomes in a card must sum to 1.0
+  probability: number;          // 0.0–1.0; all outcomes within an option must sum to 1.0
   label: string;                // Short result label shown after resolution
   financialDelta: number;       // Fixed CHF change (positive = gain, negative = loss)
-                                // Use this OR financialMultiplier, not both
-  financialMultiplier?: number; // Multiplier on staked amount (1.0=no change, 0=total loss)
   quality: "good" | "neutral" | "bad";
-  feedback: string;
-  learning: string;
+  feedback: string;             // What happened
+  learning: string;             // The lesson
   scoreImpact: Partial<Scores>;
-  // For life events: can force a mandatory expense or income change
-  forcedExpense?: number;       // One-time CHF deduction from liquid cash
   incomeChange?: number;        // Permanent monthly income delta (+ or -)
+}
+
+// ─── A player-selectable option on a card ───
+export interface PlayerOption {
+  id: string;
+  label: string;                // Short button label, e.g. "Listen to Marco's GF"
+  description: string;          // One-liner shown under the label
+  outcomes: RandomOutcome[];    // Probabilistic outcomes for this choice
 }
 
 // ─── Card categories ───
@@ -42,10 +46,7 @@ export interface ChaosCard {
   headline: string;
   description: string;
   emoji: string;
-  stakeMode: "fixed" | "percentage" | "choice" | "none";
-  fixedAmount?: number;         // CHF amount at stake when stakeMode === "fixed"
-  defaultPct?: number;          // % of portfolio when stakeMode === "percentage"
-  outcomes: RandomOutcome[];
+  options: PlayerOption[];      // Player picks one; each option resolves probabilistically
   tip?: string;
   // Life-stage gating: only show this card in certain age ranges
   minAge?: number;
@@ -101,8 +102,8 @@ export interface ExtendedGameState {
 // ─── Runtime resolved event ───
 export interface ResolvedChaosEvent {
   cardId: string;
+  optionId: string;
   outcomeId: string;
-  stakeAmount: number;
   financialDelta: number;
   quality: "good" | "neutral" | "bad";
   age: number;
