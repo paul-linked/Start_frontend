@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useChallenge, calculateInvestorScore } from "@/lib/ChallengeContext";
 import SpiderChart from "@/components/game/SpiderChart";
 import type { SpiderAxis } from "@/components/game/SpiderChart";
@@ -13,17 +14,21 @@ const SCORE_MAP: { key: string; label: string }[] = [
 ];
 
 export default function ChallengeFinal() {
-  const { state, dispatch } = useChallenge();
+  const { state, actions } = useChallenge();
   const investorScore = calculateInvestorScore(state.scores);
   const totalReturn = state.portfolioValue - 500;
   const totalReturnPct = (totalReturn / 500) * 100;
 
+  // Fetch leaderboard + submit score on mount
+  useEffect(() => {
+    actions.fetchLeaderboard();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const spiderAxes: SpiderAxis[] = SCORE_MAP.map(({ key, label }) => ({
     label,
-    value: Math.round((state.scores as any)[key] ?? 50),
+    value: Math.round((state.scores as Record<string, number>)[key] ?? 50),
   }));
 
-  // Profile label based on score
   let profileTitle: string;
   let profileSub: string;
   if (investorScore >= 80) {
@@ -37,51 +42,37 @@ export default function ChallengeFinal() {
     profileSub = "You felt the pressure and it showed. Some good instincts, but the panic won a few rounds.";
   } else {
     profileTitle = "The Panic Seller";
-    profileSub = "The headlines got to you. But now you know — and knowing is the first step to doing better.";
+    profileSub = "The headlines got to you. But now you know — and knowing is the first step.";
   }
 
   return (
     <div className="px-5 pb-10 pt-8">
-      {/* Kicker */}
       <div className="text-center">
-        <span style={{
-          fontFamily: "var(--font-mono)", fontSize: 9,
-          textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--ink-4)",
-        }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--ink-4)" }}>
           Gauntlet Complete
         </span>
       </div>
 
-      {/* Title */}
       <h1 className="text-center mt-3" style={{
         fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 400,
         fontStyle: "italic", color: "var(--ink)", lineHeight: 1.15,
-      }}>
-        {profileTitle}
-      </h1>
+      }}>{profileTitle}</h1>
 
       <p className="text-center mt-2 mx-auto" style={{
         fontSize: 14, fontWeight: 300, color: "var(--ink-3)", maxWidth: 300, lineHeight: 1.6,
-      }}>
-        {profileSub}
-      </p>
+      }}>{profileSub}</p>
 
-      {/* Investor Score — big number */}
+      {/* Investor Score */}
       <div className="text-center mt-6">
-        <div style={{
-          fontFamily: "var(--font-mono)", fontSize: 9,
-          textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--ink-4)",
-          marginBottom: 4,
-        }}>
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--ink-4)", marginBottom: 4 }}>
           Investor Score
         </div>
-        <div style={{
-          fontFamily: "var(--font-display)", fontSize: 48, color: "#0f4a58", lineHeight: 1,
-        }}>
+        <div style={{ fontFamily: "var(--font-display)", fontSize: 48, color: "#0f4a58", lineHeight: 1 }}>
           {investorScore}
         </div>
         <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-4)", marginTop: 2 }}>
           out of 100
+          {state.percentile !== null && ` · top ${state.percentile}%`}
         </div>
       </div>
 
@@ -90,10 +81,9 @@ export default function ChallengeFinal() {
         <SpiderChart axes={spiderAxes} size={260} animationDelay={0.3} />
       </div>
 
-      {/* Divider */}
       <div className="mx-auto my-5" style={{ width: 24, height: 1, background: "var(--rule-heavy)" }} />
 
-      {/* Portfolio result */}
+      {/* Portfolio */}
       <div className="text-center">
         <div style={{ fontFamily: "var(--font-display)", fontSize: 26, color: "var(--ink)" }}>
           CHF {state.portfolioValue.toFixed(2)}
@@ -106,29 +96,20 @@ export default function ChallengeFinal() {
         </div>
       </div>
 
-      {/* Journey chart */}
+      {/* Journey */}
       {state.portfolioHistory.length > 1 && (
         <div className="mt-4 px-2 py-3" style={{
-          background: "var(--surface-dim)", border: "1px solid var(--rule-light)",
-          borderRadius: "var(--radius-sm)",
+          background: "var(--surface-dim)", border: "1px solid var(--rule-light)", borderRadius: "var(--radius-sm)",
         }}>
-          <div className="mb-2" style={{
-            fontFamily: "var(--font-mono)", fontSize: 9,
-            textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-4)",
-          }}>
+          <div className="mb-2" style={{ fontFamily: "var(--font-mono)", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-4)" }}>
             Your gauntlet journey
           </div>
           <svg width="100%" height="60" viewBox="0 0 300 60">
             {(() => {
               const data = state.portfolioHistory;
-              const min = Math.min(...data) * 0.9;
-              const max = Math.max(...data) * 1.05;
+              const min = Math.min(...data) * 0.9; const max = Math.max(...data) * 1.05;
               const range = max - min || 1;
-              const points = data.map((v, i) => {
-                const x = (i / Math.max(data.length - 1, 1)) * 300;
-                const y = 52 - ((v - min) / range) * 44;
-                return `${x},${y}`;
-              }).join(" ");
+              const points = data.map((v, i) => `${(i / Math.max(data.length - 1, 1)) * 300},${52 - ((v - min) / range) * 44}`).join(" ");
               return (
                 <>
                   <polygon points={`0,52 ${points} 300,52`} fill="#0f4a58" opacity="0.05" />
@@ -139,14 +120,12 @@ export default function ChallengeFinal() {
                     return <circle key={i} cx={x} cy={y} r={i === data.length - 1 ? 3.5 : 2}
                       fill={i === data.length - 1 ? "#0f4a58" : "#FFF9E5"} stroke="#0f4a58" strokeWidth={1.5} />;
                   })}
-                  {/* Phase labels */}
-                  {data.map((_, i) => {
-                    const x = (i / Math.max(data.length - 1, 1)) * 300;
-                    return <text key={i} x={x} y={60} textAnchor="middle"
+                  {data.map((_, i) => (
+                    <text key={i} x={(i / Math.max(data.length - 1, 1)) * 300} y={60} textAnchor="middle"
                       style={{ fontSize: 7, fontFamily: "var(--font-mono)", fill: "var(--ink-5)" }}>
                       {i === 0 ? "Start" : `P${i}`}
-                    </text>;
-                  })}
+                    </text>
+                  ))}
                 </>
               );
             })()}
@@ -154,46 +133,61 @@ export default function ChallengeFinal() {
         </div>
       )}
 
-      {/* Leaderboard placeholder */}
-      <div className="mt-5" style={{
-        border: "1px solid var(--rule)", borderRadius: "var(--radius)",
-        overflow: "hidden",
-      }}>
-        <div className="px-4 py-3" style={{
-          background: "var(--surface-dim)",
-          borderBottom: "1px solid var(--rule-light)",
-        }}>
-          <span style={{
-            fontFamily: "var(--font-mono)", fontSize: 9,
-            textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--ink-4)",
-          }}>
-            Leaderboard
-          </span>
+      {/* Leaderboard */}
+      <div className="mt-5" style={{ border: "1px solid var(--rule)", borderRadius: "var(--radius)", overflow: "hidden" }}>
+        <div className="px-4 py-3" style={{ background: "var(--surface-dim)", borderBottom: "1px solid var(--rule-light)" }}>
+          <div className="flex items-center justify-between">
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--ink-4)" }}>
+              Leaderboard
+            </span>
+            {state.totalPlayers > 0 && (
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--ink-5)" }}>
+                {state.totalPlayers} players
+              </span>
+            )}
+          </div>
         </div>
 
-        {/* Your entry */}
+        {/* Your entry (highlighted) */}
         <div className="flex items-center gap-3 px-4 py-3" style={{
-          background: "rgba(15,74,88,0.04)",
-          borderBottom: "1px solid var(--rule-light)",
+          background: "rgba(15,74,88,0.04)", borderBottom: "1px solid var(--rule-light)",
         }}>
-          <span style={{
-            fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 500,
-            color: "#0f4a58", width: 24,
-          }}>
-            —
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 500, color: "#0f4a58", width: 24 }}>
+            {state.rank ?? "—"}
           </span>
           <span style={{ flex: 1, fontSize: 14, fontWeight: 500, color: "var(--ink)" }}>
-            {state.playerName}
+            {state.playerName} (you)
           </span>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 500, color: "#0f4a58" }}>
             {investorScore}
           </span>
         </div>
 
-        {/* Placeholder message */}
-        <div className="px-4 py-4 text-center" style={{ fontSize: 12, color: "var(--ink-4)" }}>
-          Leaderboard updates when connected to server
-        </div>
+        {/* Other entries */}
+        {state.leaderboard.length > 0 ? (
+          state.leaderboard
+            .filter((e) => e.name !== state.playerName)
+            .slice(0, 9)
+            .map((entry) => (
+              <div key={entry.rank} className="flex items-center gap-3 px-4 py-2.5" style={{
+                borderBottom: "1px solid var(--rule-light)",
+              }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--ink-4)", width: 24 }}>
+                  {entry.rank}
+                </span>
+                <span style={{ flex: 1, fontSize: 13, color: "var(--ink-2)" }}>
+                  {entry.name}
+                </span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--ink-3)" }}>
+                  {entry.investorScore}
+                </span>
+              </div>
+            ))
+        ) : (
+          <div className="px-4 py-4 text-center" style={{ fontSize: 12, color: "var(--ink-4)" }}>
+            {state.playerId ? "Loading leaderboard..." : "Leaderboard available when connected to server"}
+          </div>
+        )}
       </div>
 
       {/* Actions */}
@@ -201,7 +195,7 @@ export default function ChallengeFinal() {
         <button className="w-full cursor-pointer active:scale-[0.97] transition-transform" style={{
           background: "var(--ink)", color: "var(--bg)", border: "none", borderRadius: "var(--radius-sm)",
           padding: "14px 24px", fontSize: 14, fontWeight: 500, fontFamily: "var(--font-body)",
-        }} onClick={() => dispatch({ type: "RESET" })}>
+        }} onClick={actions.reset}>
           Try Again
         </button>
 
@@ -217,16 +211,15 @@ export default function ChallengeFinal() {
             background: "none", border: "none", color: "var(--ink-3)", fontSize: 13,
             fontFamily: "var(--font-body)", textDecoration: "underline",
             textUnderlineOffset: 3, textDecorationColor: "var(--rule)", cursor: "pointer",
-          }} onClick={() => window.location.reload()}>
+          }} onClick={() => window.location.href = "/"}>
             Back to home
           </button>
         </div>
       </div>
 
-      {/* Footer */}
       <div className="text-center mt-8" style={{
-        fontFamily: "var(--font-mono)", fontSize: 8,
-        letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--ink-5)",
+        fontFamily: "var(--font-mono)", fontSize: 8, letterSpacing: "0.14em",
+        textTransform: "uppercase", color: "var(--ink-5)",
       }}>
         Wealth Manager Arena · The Gauntlet · PostFinance × START Hackathon 2026
       </div>

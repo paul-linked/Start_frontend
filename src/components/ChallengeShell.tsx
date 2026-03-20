@@ -55,9 +55,7 @@ function ChallengeRouter() {
                   <span style={{
                     fontFamily: "var(--font-mono)", fontSize: 9,
                     textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-4)",
-                  }}>
-                    Phase {state.currentPhase} / 5
-                  </span>
+                  }}>Phase {state.currentPhase} / 5</span>
                 </div>
                 <div className="mt-1.5" style={{ height: 2, background: "var(--rule)", borderRadius: 1 }}>
                   <div style={{
