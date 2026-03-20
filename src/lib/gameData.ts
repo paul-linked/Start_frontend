@@ -89,23 +89,23 @@ export const ROUNDS: Round[] = [
       cards: [
         {
           id: "1a",
-          headline: "A friend says CHF 50 is too little to invest.",
-          description: "\"Wait until you have at least a thousand,\" they say. What do you think?",
+          headline: "Your flatmate says CHF 50 is too little to invest.",
+          description: "\"Bro, just buy a nice dinner,\" he says, already Googling restaurants. What do you do?",
           options: [
             {
               id: "start",
-              label: "Start investing anyway",
-              description: "Every journey starts somewhere",
+              label: "Invest it anyway",
+              description: "Dinner is temporary. Compound interest is forever.",
               quality: "good",
-              feedback: "Smart move. You don't need thousands to start.",
+              feedback: "Smart. Your flatmate will have a great evening. You'll have a better decade.",
               learning:
-                "Compound interest doesn't care about starting size. CHF 50 invested monthly at 7% becomes over CHF 7,500 in 8 years.",
+                "Compound interest doesn't care about starting size. CHF 50 growing at 7% annually doubles to CHF 100 in about 10 years — and that's before you add anything else.",
               scoreImpact: s(0, 1, 0, 2, 1),
             },
             {
               id: "wait",
               label: "Wait until you have more",
-              description: "Maybe they have a point",
+              description: "Maybe he has a point",
               quality: "neutral",
               feedback: "The instinct to wait is common — but the best time to start was yesterday.",
               learning:
@@ -114,10 +114,10 @@ export const ROUNDS: Round[] = [
             },
             {
               id: "spend",
-              label: "Spend it — you earned it",
-              description: "CHF 50 won't change anything",
+              label: "Fine, dinner it is 🍝",
+              description: "YOLO, you only live once",
               quality: "bad",
-              feedback: "Fair enough — but this month's CHF 50 could become CHF 85 in 8 years on its own.",
+              feedback: "Delicious. But that pasta could have been CHF 85 in 8 years. Hope it was worth it.",
               learning:
                 "Small amounts feel insignificant today, but money has a time value. CHF 50 now is worth more than CHF 50 in the future because of what it could earn in between.",
               scoreImpact: s(0, 0, -1, 0, -1),
@@ -154,7 +154,7 @@ export const ROUNDS: Round[] = [
         {
           id: "1c",
           headline: "Where do you put your first CHF 50?",
-          description: "You have your account open. Three options are available to you.",
+          description: "Account open. Three options stare back at you. Choose wisely — or at least better than your uncle did in 2001.",
           options: [
             {
               id: "savings",
@@ -244,7 +244,7 @@ export const ROUNDS: Round[] = [
           ],
         },
       ],
-      chartData: [38, 35, 28, 22, 14, 10, 8, 12, 20, 40, 44],
+      chartData: [44, 42, 38, 35, 28, 22, 14, 10, 8, 7, 6],
       chartLabel: "SMI · 6 months",
       chartDelta: "−12.0%",
       outcomes: {
@@ -274,7 +274,7 @@ export const ROUNDS: Round[] = [
         },
       },
     },
-    marketReturns: { savings: 0.5, bonds: 1.8, etf: -12.0 },
+    marketReturns: { savings: 0.5, bonds: 3.8, etf: -12.0 },
   },
 
   // ═══════════════════════════════════════
@@ -292,9 +292,9 @@ export const ROUNDS: Round[] = [
       cards: [
         {
           id: "4a",
-          headline: "A coworker doubled their money on a meme stock.",
+          headline: "A coworker doubled their money on a meme stock. They will not stop talking about it.",
           description:
-            "\"Get in now before it goes higher,\" they say. They show you their gains on their phone.",
+            "\"I'm basically a genius,\" they say, showing you a screenshot for the fourth time today. \"Get in now before it moons.\"",
           options: [
             {
               id: "pass",
@@ -309,8 +309,8 @@ export const ROUNDS: Round[] = [
             },
             {
               id: "small",
-              label: "Put 10% in — why not",
-              description: "A small bet won't hurt",
+              label: "Put 10% in — just to shut them up",
+              description: "A small bet, and maybe some peace and quiet",
               quality: "neutral",
               feedback:
                 "A small speculative allocation is a real strategy — but only when the rest of your portfolio is solid.",
@@ -324,7 +324,7 @@ export const ROUNDS: Round[] = [
               description: "This could be your big break",
               quality: "bad",
               feedback:
-                "The stock dropped 60% the following month. Your coworker sold too late and lost their gains too.",
+                "The stock dropped 60% the following month. Your coworker went very quiet. You did not.",
               learning:
                 "FOMO (Fear Of Missing Out) is one of the most expensive emotions in investing. If your entire strategy depends on getting lucky, it's not a strategy.",
               scoreImpact: s(-2, -2, -2, 0, -2),
@@ -333,9 +333,9 @@ export const ROUNDS: Round[] = [
         },
         {
           id: "4b",
-          headline: "Your portfolio is down 15% this quarter.",
+          headline: "You check your portfolio and it's down 8% from its peak.",
           description:
-            "You've been checking it every morning. The red numbers are starting to affect your mood.",
+            "It recovered since the crash in year three, but it's pulled back again. You've been checking it every morning.",
           options: [
             {
               id: "stop_checking",
@@ -374,9 +374,9 @@ export const ROUNDS: Round[] = [
         },
         {
           id: "4c",
-          headline: "An email promises 'guaranteed 15% annual returns.'",
+          headline: "An email promises 'guaranteed 15% annual returns.' It has a lot of exclamation marks.",
           description:
-            "\"Exclusive fund, limited spots, act now.\" The brochure looks professional.",
+            "\"EXCLUSIVE FUND!! LIMITED SPOTS!! ACT NOW!!\" The logo is a golden eagle. The sender is definitely not a prince.",
           options: [
             {
               id: "delete",
@@ -386,7 +386,7 @@ export const ROUNDS: Round[] = [
               feedback:
                 "Correct. Any 'guaranteed' return above the risk-free rate is either a lie or a Ponzi scheme.",
               learning:
-                "The average stock market return is ~7% annually. Anyone promising double that with 'no risk' is promising something that doesn't exist. This is how most investment scams operate — professional appearance, impossible returns.",
+                "The average long-term stock market return in Switzerland is around 5–6% annually. Anyone promising double that with 'no risk' is promising something that doesn't exist. This is how most investment scams operate — professional appearance, impossible returns.",
               scoreImpact: s(0, 2, 0, 3, 1),
             },
             {
@@ -415,9 +415,9 @@ export const ROUNDS: Round[] = [
         },
         {
           id: "4d",
-          headline: "Your news app sent 12 notifications today.",
+          headline: "Your phone sent 12 market notifications before breakfast.",
           description:
-            "Markets up 2%. Then down 1%. Then up 0.5%. Then breaking news. Then another alert. It never stops.",
+            "Markets up 2%. Down 1%. Up 0.5%. \"BREAKING.\" Another alert. Your coffee is getting cold.",
           options: [
             {
               id: "turn_off",
@@ -456,7 +456,7 @@ export const ROUNDS: Round[] = [
         },
       ],
     },
-    marketReturns: { savings: 0.5, bonds: 1.5, etf: 6.2 },
+    marketReturns: { savings: 0.5, bonds: 1.5, etf: 11.4 },
     injection: {
       amount: 150,
       reason: "End-of-year bonus! CHF 150 added to your portfolio.",
@@ -484,7 +484,7 @@ export const ROUNDS: Round[] = [
           standfirst:
             "Veteran hedge fund manager warns of overheated markets and imminent rate hike.",
           paragraphs: [
-            "After 18 months of near-continuous gains, cracks are forming beneath the surface. Price-to-earnings ratios across the SMI sit 22% above historical averages — a level last seen before the 2018 sell-off.",
+            "After 18 months of near-continuous gains, cracks are forming beneath the surface. Price-to-earnings ratios across the SMI sit 22% above historical averages — a level last seen before the 2007 peak.",
             "\"We've moved 40% of our portfolio to cash,\" says Henrik Zeller of Alpina Capital. \"When the music stops, you want to be near the exit.\" Zeller points to a looming rate decision from the SNB as a potential catalyst for correction.",
             "Retail investor optimism, measured by the Swiss Sentiment Index, has hit its highest reading in a decade. Historically, extreme optimism has preceded 70% of significant market drawdowns.",
           ],
@@ -550,15 +550,15 @@ export const ROUNDS: Round[] = [
       type: "allocation",
       products: ALL_PRODUCTS,
       marketContext:
-        "Interest rates rising. Inflation at 3.2%. Housing market cooling. Tech stocks rallying.",
+        "Interest rates rising. Inflation at 3.2%. Housing market cooling. Tech stocks on a tear — individual picks are swinging wildly.",
     },
     marketReturns: {
       savings: 0.5,
       bonds: 1.0,
-      etf: 7.8,
-      stocks: 12.0,
-      gold: 4.2,
-      reits: -2.0,
+      etf: 9.2,
+      stocks: 23.5,
+      gold: 6.8,
+      reits: -4.5,
     },
   },
 ];

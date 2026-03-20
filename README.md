@@ -97,6 +97,7 @@ All colors are CSS variables in `globals.css`. Swap the `:root` block or use `[d
 
 ## PWA
 
+
 The app uses a manual service worker (`public/sw.js`) instead of `next-pwa`, which is incompatible with Next.js 16.
 
 - Service worker registered in production via `useServiceWorker` hook (wired through `ClientProviders`)

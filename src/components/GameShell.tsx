@@ -3,6 +3,7 @@
 import { GameProvider, useGame } from "@/lib/GameContext";
 import AlpineBackground from "@/components/AlpineBackground";
 import Topbar from "@/components/game/Topbar";
+import AssetGlossary from "@/components/game/AssetGlossary";
 import LandingPage from "@/components/LandingPage";
 import RoundIntro from "@/components/game/RoundIntro";
 import SnapDecision from "@/components/game/SnapDecision";
