@@ -14,6 +14,10 @@ import type {
   PortfolioAllocation,
   InvestorProfile,
   ProfileQuadrant,
+  Round,
+  SnapDecisionQuest,
+  BriefingRoomQuest,
+  AllocationQuest,
 } from "../types";
 import {
   ROUNDS,
@@ -23,6 +27,13 @@ import {
   PERFECT_GHOST,
   PROFILE_LABELS,
 } from "./gameData";
+import { generateFreePlayRound } from "./freePlay";
+
+// ─── Round lookup: demo data for 1-6, generated for 7+ ───
+function getRound(roundNum: number): Round | undefined {
+  if (roundNum <= ROUNDS.length) return ROUNDS[roundNum - 1];
+  return generateFreePlayRound(roundNum);
+}
 
 // ─── Initial state ───
 const initialState: GameState = {
@@ -46,6 +57,7 @@ const initialState: GameState = {
   portfolioDelta: 0,
   snapCardIndex: 0,
   decisions: [],
+  freePlay: false,
 };
 
 // ─── Actions ───
@@ -60,7 +72,8 @@ type Action =
   | { type: "CONTINUE_TO_INJECTION" }
   | { type: "CONTINUE_AFTER_INJECTION" }
   | { type: "NEXT_ROUND" }
-  | { type: "SHOW_END_SCREEN" };
+  | { type: "SHOW_END_SCREEN" }
+  | { type: "CONTINUE_FREE_PLAY" };
 
 // ─── Helpers ───
 function clampScore(val: number): number {
@@ -76,7 +89,7 @@ function applyScoreImpact(
   for (const [key, val] of Object.entries(impact)) {
     if (val) {
       result[key as keyof Scores] = clampScore(
-        result[key as keyof Scores] + val * multiplier
+        result[key as keyof Scores] + (val as number) * multiplier
       );
     }
   }
@@ -99,6 +112,12 @@ function xpForQuality(q: "good" | "neutral" | "bad"): number {
   return q === "good" ? 50 : q === "neutral" ? 25 : 10;
 }
 
+function extendSavingsHistory(current: number[], totalDeposited: number, newDeposited: number): number[] {
+  const last = current[current.length - 1] ?? totalDeposited;
+  const newVal = Math.round((last + (newDeposited - totalDeposited)) * 1.005 * 100) / 100;
+  return [...current, newVal];
+}
+
 // ─── Reducer ───
 function gameReducer(state: GameState, action: Action): GameState {
   switch (action.type) {
@@ -110,7 +129,7 @@ function gameReducer(state: GameState, action: Action): GameState {
       };
 
     case "CONTINUE_TO_QUEST": {
-      const round = ROUNDS[state.currentRound - 1];
+      const round = getRound(state.currentRound);
       if (!round) return state;
       const screenMap: Record<string, GameScreen> = {
         snap_decision: "snap_decision",
@@ -150,16 +169,15 @@ function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "NEXT_SNAP_CARD": {
-      const round = ROUNDS[state.currentRound - 1];
+      const round = getRound(state.currentRound);
       if (!round || round.quest.type !== "snap_decision") return state;
+      const quest = round.quest as SnapDecisionQuest;
       const nextIdx = state.snapCardIndex + 1;
-      if (nextIdx >= round.quest.cards.length) {
-        // All cards done — go to portfolio update
+      if (nextIdx >= quest.cards.length) {
         const returnRate = calculatePortfolioReturn(
           state.allocation,
           round.marketReturns
         );
-        // If no allocation yet (round 1), apply a small default gain
         const delta =
           Object.keys(state.allocation).length === 0
             ? state.portfolioValue * 0.02
@@ -182,9 +200,10 @@ function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "BRIEFING_DECISION": {
-      const round = ROUNDS[state.currentRound - 1];
+      const round = getRound(state.currentRound);
       if (!round || round.quest.type !== "briefing_room") return state;
-      const outcome = round.quest.outcomes[action.choice];
+      const quest = round.quest as BriefingRoomQuest;
+      const outcome = quest.outcomes[action.choice];
       const newScores = applyScoreImpact(state.scores, outcome.scoreImpact);
       const newXp = state.xp + xpForQuality(outcome.quality);
       return {
@@ -210,13 +229,11 @@ function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "ALLOCATION_CONFIRM": {
-      const round = ROUNDS[state.currentRound - 1];
+      const round = getRound(state.currentRound);
       if (!round) return state;
 
-      // Calculate diversification score from allocation
       const values = Object.values(action.allocation).filter((v) => v > 0);
       const n = values.length;
-      // Simple diversification: more products + more even = higher score
       const evenness =
         n > 1
           ? 1 -
@@ -260,7 +277,7 @@ function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "CONTINUE_TO_PORTFOLIO": {
-      const round = ROUNDS[state.currentRound - 1];
+      const round = getRound(state.currentRound);
       if (!round) return state;
       const returnRate = calculatePortfolioReturn(
         state.allocation,
@@ -286,7 +303,7 @@ function gameReducer(state: GameState, action: Action): GameState {
     }
 
     case "CONTINUE_AFTER_INJECTION": {
-      const round = ROUNDS[state.currentRound - 1];
+      const round = getRound(state.currentRound);
       if (!round?.injection) return state;
       const newValue =
         Math.round(
@@ -297,23 +314,22 @@ function gameReducer(state: GameState, action: Action): GameState {
         ...state,
         portfolioValue: newValue,
         totalDeposited: newDeposited,
-        // Update last history entry with injection
         portfolioHistory: [
           ...state.portfolioHistory.slice(0, -1),
           newValue,
         ],
+        savingsHistory: extendSavingsHistory(state.savingsHistory, state.totalDeposited, newDeposited),
         screen: "round_intro",
         currentRound: state.currentRound + 1,
       };
     }
 
     case "NEXT_ROUND": {
-      const round = ROUNDS[state.currentRound - 1];
-      // Check for injection first
+      const round = getRound(state.currentRound);
       if (round?.injection) {
         return { ...state, screen: "cash_injection" };
       }
-      if (state.currentRound >= TOTAL_ROUNDS) {
+      if (!state.freePlay && state.currentRound >= TOTAL_ROUNDS) {
         return { ...state, screen: "end_screen" };
       }
       return {
@@ -326,6 +342,14 @@ function gameReducer(state: GameState, action: Action): GameState {
     case "SHOW_END_SCREEN":
       return { ...state, screen: "end_screen" };
 
+    case "CONTINUE_FREE_PLAY":
+      return {
+        ...state,
+        freePlay: true,
+        screen: "round_intro",
+        currentRound: state.currentRound + 1,
+      };
+
     default:
       return state;
   }
@@ -335,9 +359,7 @@ function gameReducer(state: GameState, action: Action): GameState {
 export function calculateProfile(state: GameState): InvestorProfile {
   const { scores, portfolioValue, totalDeposited } = state;
 
-  // X-axis: Reactive (-1) to Rational (+1)
   const rational = ((scores.patience + scores.learning) / 2 - 50) / 50;
-  // Y-axis: Conservative (-1) to Aggressive (+1)
   const aggressive =
     ((100 - scores.riskAlignment + (100 - scores.diversification)) / 2 - 50) /
     50;
@@ -361,6 +383,9 @@ export function calculateProfile(state: GameState): InvestorProfile {
     totalReturnPct: Math.round(totalReturnPct * 10) / 10,
   };
 }
+
+// ─── Exported round getter (for use in components) ───
+export { getRound };
 
 // ─── Context ───
 interface GameContextType {

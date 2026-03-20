@@ -145,6 +145,9 @@ export interface GameState {
     choice: string;
     quality: "good" | "neutral" | "bad";
   }>;
+
+  // Free play mode (continues beyond demo rounds)
+  freePlay: boolean;
 }
 
 // ─── Investor Profile (end screen) ───

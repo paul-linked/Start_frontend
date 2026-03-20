@@ -3,18 +3,20 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 import { useGame } from "@/lib/GameContext";
-import { ROUNDS } from "@/lib/gameData";
+import { getRound } from "@/lib/GameContext";
 import type { SnapOption } from "../../types";
+import type { SnapDecisionQuest } from "../../types";
 
 export default function SnapDecision() {
   const { state, dispatch } = useGame();
-  const round = ROUNDS[state.currentRound - 1];
-  if (!round || round.quest.type !== "snap_decision") return null;
+  const round = getRound(state.currentRound);
+if (!round || round.quest.type !== "snap_decision") return null;
 
-  const card = round.quest.cards[state.snapCardIndex];
-  if (!card) return null;
+const quest = round.quest as SnapDecisionQuest;
+const card = quest.cards[state.snapCardIndex];
+if (!card) return null;
 
-  const totalCards = round.quest.cards.length;
+const totalCards = quest.cards.length;
   const options = card.options;
   const rightOption = options[0];
   const leftOption = options[options.length - 1];

@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useGame } from "@/lib/GameContext";
-import { ROUNDS } from "@/lib/gameData";
+import { useGame, getRound } from "@/lib/GameContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14 },
@@ -13,7 +12,7 @@ const fadeUp = {
   }),
 };
 
-const QUALITY_STYLES = {
+const STYLES: { [key: string]: { bg: string; border: string; icon: string; iconBg: string; iconColor: string; label: string } } = {
   good: {
     bg: "var(--green-wash)",
     border: "var(--green-soft)",
@@ -45,19 +44,25 @@ export default function Feedback() {
   const feedback = state.currentFeedback;
   if (!feedback) return null;
 
-  const style = QUALITY_STYLES[feedback.quality];
-  const round = ROUNDS[state.currentRound - 1];
-  const isSnapQuest = round?.quest.type === "snap_decision";
-  const hasMoreCards =
-    isSnapQuest &&
-    round.quest.type === "snap_decision" &&
-    state.snapCardIndex < round.quest.cards.length - 1;
+  const style = STYLES[feedback.quality] || STYLES.neutral;
+
+  // Figure out if there are more snap cards
+  const round = getRound(state.currentRound);
+  let isSnapQuest = false;
+  let hasMoreCards = false;
+
+  if (round && round.quest && round.quest.type === "snap_decision") {
+    isSnapQuest = true;
+    // Access cards safely via any cast to avoid all type issues
+    const cards = (round.quest as any).cards;
+    if (Array.isArray(cards)) {
+      hasMoreCards = state.snapCardIndex < cards.length - 1;
+    }
+  }
 
   function handleContinue() {
-    if (hasMoreCards) {
+    if (isSnapQuest) {
       dispatch({ type: "NEXT_SNAP_CARD" });
-    } else if (isSnapQuest) {
-      dispatch({ type: "NEXT_SNAP_CARD" }); // triggers portfolio_update when last card
     } else {
       dispatch({ type: "CONTINUE_TO_PORTFOLIO" });
     }
@@ -166,8 +171,9 @@ export default function Feedback() {
           custom={3}
         >
           {Object.entries(feedback.scoreDeltas).map(([key, val]) => {
-            if (!val) return null;
-            const isPos = val > 0;
+            const v = Number(val) || 0;
+            if (v === 0) return null;
+            const isPos = v > 0;
             return (
               <span
                 key={key}
@@ -181,8 +187,7 @@ export default function Feedback() {
                   color: isPos ? "var(--green)" : "var(--coral)",
                 }}
               >
-                {key} {isPos ? "+" : ""}
-                {val}
+                {key} {isPos ? "+" : ""}{v}
               </span>
             );
           })}

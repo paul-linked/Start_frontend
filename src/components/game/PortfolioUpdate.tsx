@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useGame } from "@/lib/GameContext";
+import { getRound, useGame } from "@/lib/GameContext";
 import { ROUND_INSIGHTS, TOTAL_ROUNDS, ROUNDS } from "@/lib/gameData";
 
 const fadeUp = {
@@ -156,7 +156,7 @@ export default function PortfolioUpdate() {
   const { state, dispatch } = useGame();
   const delta = state.portfolioDelta;
   const isPositive = delta >= 0;
-  const round = ROUNDS[state.currentRound - 1];
+  const round = getRound(state.currentRound);
   const insight = ROUND_INSIGHTS[state.currentRound] || "";
   const savingsValue = state.savingsHistory[state.currentRound] ?? 0;
 

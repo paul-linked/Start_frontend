@@ -79,7 +79,7 @@ export default function Topbar() {
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25 }}
             >
-              CHF {state.portfolioValue.toFixed(2)}
+              PFF {state.portfolioValue.toFixed(2)}
             </motion.span>
           </AnimatePresence>
           <span

@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo, useCallback } from "react";
 import { useGame } from "@/lib/GameContext";
-import { ROUNDS } from "@/lib/gameData";
+import { getRound } from "@/lib/GameContext";
 import type { PortfolioAllocation } from "../../types";
 
 // ─── Panic Ticker ───
@@ -339,10 +339,12 @@ const SOURCE_CONFIG = [
 // ─── Main Component ───
 export default function BriefingRoom() {
   const { state, dispatch } = useGame();
-  const round = ROUNDS[state.currentRound - 1];
+  const round = getRound(state.currentRound);
   if (!round || round.quest.type !== "briefing_room") return null;
+  const quest = round.quest as import("../../types").BriefingRoomQuest;
 
-  const quest = round.quest;
+
+//   const quest = round.quest;
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
   const [readSet, setReadSet] = useState<Set<number>>(new Set());
   const [showAllocation, setShowAllocation] = useState(false);
@@ -383,12 +385,15 @@ export default function BriefingRoom() {
 
   // Allocation logic
   const availableProducts = useMemo(() => {
-    for (let i = state.currentRound - 2; i >= 0; i--) {
-      const r = ROUNDS[i];
-      if (r?.quest.type === "allocation") return r.quest.products;
+    for (let i = state.currentRound - 1; i >= 1; i--) {
+      const r = getRound(i);
+      if (r?.quest.type === "allocation") {
+        return (r.quest as import("../../types").AllocationQuest).products;
+      }
     }
     return [];
   }, [state.currentRound]);
+
 
   const [alloc, setAlloc] = useState<PortfolioAllocation>(() => {
     const init: PortfolioAllocation = {};

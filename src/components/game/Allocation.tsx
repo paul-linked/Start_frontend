@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useMemo, useCallback } from "react";
 import { useGame } from "@/lib/GameContext";
-import { ROUNDS } from "@/lib/gameData";
+import { getRound } from "@/lib/GameContext";
 import type { PortfolioAllocation } from "../../types";
 
 const fadeUp = {
@@ -135,10 +135,11 @@ function Legend({ segments }: { segments: { id: string; label: string; pct: numb
 
 export default function Allocation() {
   const { state, dispatch } = useGame();
-  const round = ROUNDS[state.currentRound - 1];
+  const round = getRound(state.currentRound);
   if (!round || round.quest.type !== "allocation") return null;
+  const quest = round.quest as import("../../types").AllocationQuest;
 
-  const quest = round.quest;
+//   const quest = round.quest;
   const products = quest.products;
 
   // Initialize allocation — even split

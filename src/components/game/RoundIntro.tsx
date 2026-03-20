@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useGame } from "@/lib/GameContext";
-import { ROUNDS } from "@/lib/gameData";
+import { getRound } from "@/lib/GameContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14 },
@@ -15,7 +15,7 @@ const fadeUp = {
 
 export default function RoundIntro() {
   const { state, dispatch } = useGame();
-  const round = ROUNDS[state.currentRound - 1];
+  const round = getRound(state.currentRound);
   if (!round) return null;
 
   return (
